@@ -1,6 +1,6 @@
 <?php
 // Contraseña a hashear
-$password = 'admin2024';
+$password = 'DavidContra123';
 
 // Generar el hash
 $hashed_password = password_hash($password, PASSWORD_DEFAULT);

@@ -63,5 +63,5 @@ INSERT INTO roles (nombre) VALUES ('mesero'), ('cajero'), ('admin');
 INSERT INTO usuarios (username, password, rol_id) 
 VALUES 
 ('admin', '$2y$10$Df3c6aeGdhrzVf3RQlEvTu07S1BrXm.GIHYP7Nw2y2ozW9dj9x7/O', 3),  -- Contraseña: admin2024
-('David', '$2y$10$P19EWo.PsWJoGe8aYl3.8eI3hHdwmY/sI5HptA7OdE0KE7xlzz6Au', 1),  -- Contraseña: David123
+('David', '$2y$10$P19EWo.PsWJoGe8aYl3.8eI3hHdwmY/sI5HptA7OdE0KE7xlzz6Au', 1),  -- Contraseña: DavidContra123
 ('JuanDavid', '$2y$10$U84isAvpzV4..eO/5gfLpO14evA2kGbhjE.lC2u2cvWt2P4J20FLO', 2);  -- Contraseña: Juanda2020 

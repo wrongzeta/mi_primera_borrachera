@@ -1,0 +1,113 @@
+/* Estilos generales */
+body {
+    background-color: #1a1a2e; /* Fondo oscuro */
+    color: #f5f5f5; /* Texto blanco suave */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Título */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+/* Párrafo */
+p {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+/* Estilos del formulario de pedido */
+form {
+    background-color: #0B1A35; /* Fondo del formulario */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    width: 100%; /* Ancho completo en dispositivos pequeños */
+    max-width: 800px; /* Ancho máximo */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+/* Estilo de los productos */
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Columna flexible */
+    gap: 20px; /* Espaciado entre productos */
+}
+
+.producto-item {
+    background-color: #2E8BC0; /* Fondo azul para cada producto */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Centrar texto */
+    transition: transform 0.2s; /* Efecto de animación */
+}
+
+/* Efecto hover para los productos */
+.producto-item:hover {
+    transform: scale(1.05); /* Aumentar ligeramente al pasar el mouse */
+}
+
+/* Estilo de las imágenes */
+.producto-item img {
+    max-width: 100%; /* Imagen responsiva */
+    height: auto; /* Mantener proporción */
+    border-radius: 5px; /* Bordes redondeados en imágenes */
+}
+
+/* Estilo de los botones */
+input[type="submit"] {
+    background-color: #FF4C61; /* Color vibrante */
+    color: #FFFFFF; /* Texto blanco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0; /* Margen entre botones */
+    font-size: 1em; /* Tamaño de texto del botón */
+}
+
+/* Efecto hover para botones */
+input[type="submit"]:hover {
+    background-color: #FF6A80; /* Resaltado en hover */
+}
+
+/* Estilo de la lista de pedidos */
+#pedido-actual {
+    margin-top: 20px; /* Margen superior */
+    background-color: #0B1A35; /* Fondo del pedido */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 15px; /* Espaciado interno */
+    width: 100%; /* Ancho completo en dispositivos pequeños */
+    max-width: 800px; /* Ancho máximo */
+}
+
+/* Estilos para la lista */
+#pedido-actual ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+}
+
+#pedido-actual li {
+    margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+}
+
+/* Media Queries para hacer el diseño más responsivo */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em; /* Tamaño de texto más pequeño en pantallas pequeñas */
+    }
+
+    p, input[type="submit"] {
+        font-size: 0.9em; /* Tamaño de texto más pequeño en pantallas pequeñas */
+    }
+
+    .productos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Columnas más pequeñas en pantallas pequeñas */
+    }
+}

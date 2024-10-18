@@ -2,10 +2,27 @@
 session_start();
 
 // Verificar si el usuario ha iniciado sesión y tiene el rol de mesero
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) { // Cambia 1 si el rol de mesero tiene un ID diferente
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) {
     header("Location: login.php");
     exit();
 }
+
+// Conectar a la base de datos
+$host = 'localhost';
+$db   = 'mi_primera_borrachera';
+$user = 'root'; 
+$pass = '';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$db;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Error de conexión: " . $e->getMessage());
+}
+
+// Obtener los productos de la base de datos
+$query = $pdo->query("SELECT id, nombre, precio, imagen FROM productos");
+$productos = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +31,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) { // Cambia 1 si el 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz del Mesero</title>
-    <link rel="stylesheet" href="styles_mesero.css"> <!-- Si tienes estilos -->
+    <link rel="stylesheet" href="styles_mesero.css"> 
 </head>
 <body>
     <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?></h1>
@@ -22,45 +39,56 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) { // Cambia 1 si el 
 
     <h2>Tomar Pedido</h2>
     <form action="procesar_pedido.php" method="POST">
-        <label for="producto">Selecciona un producto:</label>
-        <select id="producto" name="producto_id" required>
+        <div class="productos-grid">
             <?php
-            // Conexión a la base de datos
-            $servidor = "localhost";
-            $usuario = "root";
-            $contraseña = "";
-            $base_datos = "mi_primera_borrachera";
+            // Mostrar los productos en la cuadrícula
+            foreach ($productos as $producto) {
+                // Obtener la imagen directamente de la base de datos
+                $imagen = $producto['imagen'];
 
-            $conn = new mysqli($servidor, $usuario, $contraseña, $base_datos);
-
-            // Verifica la conexión
-            if ($conn->connect_error) {
-                die("Conexión fallida: " . $conn->connect_error);
+                echo "<div class='producto-item'>";
+                echo "<input type='checkbox' id='producto_" . $producto['id'] . "' name='productos[" . $producto['id'] . "][id]' value='" . $producto['id'] . "'>";
+                echo "<label for='producto_" . $producto['id'] . "'>";
+                echo "<img src='" . $imagen . "' alt='" . $producto['nombre'] . "' style='width:100px;height:auto;'><br>"; // Mostrar la imagen
+                echo "<strong>" . $producto['nombre'] . "</strong><br>";
+                echo "Precio: $" . number_format($producto['precio'], 2) . "<br>";
+                echo "</label>";
+                echo "<label for='cantidad_" . $producto['id'] . "'>Cantidad:</label>";
+                echo "<input type='number' id='cantidad_" . $producto['id'] . "' name='productos[" . $producto['id'] . "][cantidad]' min='0' value='0'><br>";
+                echo "</div>";
             }
-
-            // Consulta para obtener productos
-            $sql = "SELECT id, nombre FROM productos";
-            $resultado = $conn->query($sql);
-
-            if ($resultado->num_rows > 0) {
-                while ($producto = $resultado->fetch_assoc()) {
-                    echo "<option value='" . $producto['id'] . "'>" . $producto['nombre'] . "</option>";
-                }
-            } else {
-                echo "<option value=''>No hay productos disponibles</option>";
-            }
-
-            $conn->close();
             ?>
-        </select>
-
-        <label for="cantidad">Cantidad:</label>
-        <input type="number" id="cantidad" name="cantidad" min="1" required>
-
+        </div>
+        <br>
         <input type="submit" value="Agregar a Pedido">
     </form>
 
-    <!-- Aquí puedes añadir más funcionalidades para ver pedidos, cerrar pedidos, etc. -->
+    <h2>Ver Pedido</h2>
+    <div id="pedido-actual">
+        <?php
+        // Mostrar el pedido actual si hay productos en la sesión
+        if (isset($_SESSION['pedido']) && !empty($_SESSION['pedido'])) {
+            echo "<ul>";
+            foreach ($_SESSION['pedido'] as $id => $detalle) {
+                echo "<li>" . $detalle['nombre'] . " - Cantidad: " . $detalle['cantidad'] . " - Precio: $" . number_format($detalle['precio'] * $detalle['cantidad'], 2) . "</li>";
+            }
+            echo "</ul>";
+            echo "<strong>Total: $" . number_format(array_sum(array_column($_SESSION['pedido'], 'subtotal')), 2) . "</strong>";
+        } else {
+            echo "<p>No hay productos en el pedido actual.</p>";
+        }
+        ?>
+    </div>
 
+    <!-- Botón para volver a las mesas -->
+    <form action="pagina_mesas.php" method="GET">
+        <input type="submit" value="Volver a Mesas">
+    </form>
+
+    <!-- Botón para cerrar sesión -->
+    <form action="logout.php" method="POST">
+        <input type="submit" value="Cerrar Sesión">
+    </form>
+    
 </body>
 </html>
