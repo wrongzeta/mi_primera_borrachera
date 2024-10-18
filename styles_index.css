@@ -1,17 +1,20 @@
 /* Estilos generales */
+html, body {
+    height: 100%; /* Asegura que el html y el body ocupen el 100% de la altura */
+    margin: 0; /* Elimina márgenes por defecto */
+}
+
 body {
     background-color: #1a1a2e; /* Fondo oscuro */
     color: #f5f5f5; /* Texto blanco suave */
     font-family: Arial, sans-serif;
-    margin: 0;
-    height: 75vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Alinea los elementos en columna */
 }
 
 /* Contenedor principal */
 .container {
+    flex: 1; /* Permite que el contenedor principal ocupe el espacio restante */
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -53,4 +56,17 @@ p {
 .logo {
     max-width: 50%; /* Asegúrate de que el logo no exceda el ancho de su contenedor */
     height: auto; /* Mantiene la proporción */
+}
+
+footer {
+    background-color: #071124; /* Fondo oscuro para el footer */
+    color: #FFFFFF; /* Texto blanco */
+    display: flex; /* Habilita Flexbox */
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    padding: 15px;
+    width: 97.9%; /* Ancho completo */
+    position: relative; /* Para asegurarnos de que el footer esté bien posicionado */
+    bottom: 0; /* Alinear al fondo de la página */
+    max-height: 25px;
 }
