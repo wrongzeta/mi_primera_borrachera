@@ -2,7 +2,7 @@
 session_start();
 
 // Verificar si el usuario ha iniciado sesión y tiene el rol de mesero
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) {
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1 || !isset($_SESSION['mesa'])) {
     header("Location: login.php");
     exit();
 }
@@ -20,9 +20,15 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
 
-// Obtener los productos de la base de datos
-$query = $pdo->query("SELECT id, nombre, precio, imagen FROM productos");
-$productos = $query->fetchAll(PDO::FETCH_ASSOC);
+$mesa_seleccionada = $_SESSION['mesa'];
+
+// Asegurarse de que hay una mesa seleccionada
+if (!isset($_SESSION['mesa'])) {
+    echo "<div style='color: red;'>No has seleccionado una mesa.</div>";
+    exit(); // Salir si no hay mesa seleccionada
+}
+
+$mesa_numero = $_SESSION['mesa'];
 ?>
 
 <!DOCTYPE html>
@@ -49,6 +55,8 @@ $productos = $query->fetchAll(PDO::FETCH_ASSOC);
     <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?></h1>
     <p>Aquí puedes gestionar los pedidos.</p>
 
+    <h2>Estás en la mesa número: <?php echo htmlspecialchars($mesa_numero); ?></h2>
+
     <?php
     // Mostrar mensaje de error si existe
     if (isset($_SESSION['mensaje_error'])) {
@@ -59,8 +67,13 @@ $productos = $query->fetchAll(PDO::FETCH_ASSOC);
 
     <h2>Tomar Pedido</h2>
     <form action="procesar_pedido.php" method="POST" onsubmit="return validarFormulario();">
+        <input type="hidden" name="mesa" value="<?php echo $mesa_numero; ?>"> <!-- Agregar el número de mesa oculto -->
         <div class="productos-grid">
             <?php
+            // Obtener los productos de la base de datos
+            $query = $pdo->query("SELECT id, nombre, precio, imagen FROM productos");
+            $productos = $query->fetchAll(PDO::FETCH_ASSOC);
+
             // Mostrar los productos en la cuadrícula
             foreach ($productos as $producto) {
                 echo "<div class='producto-item'>";
@@ -106,6 +119,5 @@ $productos = $query->fetchAll(PDO::FETCH_ASSOC);
     <form action="logout.php" method="POST">
         <input type="submit" value="Cerrar Sesión">
     </form>
-    
 </body>
 </html>
