@@ -58,3 +58,17 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #FF6A80; /* Efecto hover en el botón */
 }
+
+.logout-button {
+    display: inline-block;
+    background-color: #FF4C61; /* Color del botón */
+    color: #FFFFFF; /* Texto blanco en el botón */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none; /* Sin subrayado */
+    margin-top: 20px; /* Espaciado superior */
+}
+
+.logout-button:hover {
+    background-color: #FF6A80; /* Efecto hover en el botón */
+}
