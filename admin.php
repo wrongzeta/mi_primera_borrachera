@@ -17,39 +17,40 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) {
     <link rel="stylesheet" href="styles_administrador.css">
 </head>
 <body>
-    <div class="form-container">
-        <h1>Bienvenido, Administrador <?php echo $_SESSION['usuario']; ?></h1>
-        <p>Aquí puedes gestionar todos los aspectos del bar.</p>
+    <h1>Bienvenido, Administrador <?php echo $_SESSION['usuario']; ?></h1>
+    <p>Aquí puedes gestionar todos los aspectos del bar.</p>
 
-        <h2>Gestión de Inventario</h2>
-        <form action="actualizar_inventario.php" method="POST">
-            <label for="producto_id">ID del Producto:</label>
-            <input type="number" id="producto_id" name="producto_id" required>
+    <h2>Gestión de Inventario</h2>
+    <form action="actualizar_inventario.php" method="POST">
+        <label for="producto_id">ID del Producto:</label>
+        <input type="number" id="producto_id" name="producto_id" required>
 
-            <label for="cantidad">Cantidad a actualizar:</label>
-            <input type="number" id="cantidad" name="cantidad" required>
+        <label for="cantidad">Cantidad a actualizar:</label>
+        <input type="number" id="cantidad" name="cantidad" required>
 
-            <input type="submit" value="Actualizar Inventario">
-        </form>
+        <input type="submit" value="Actualizar Inventario">
+    </form>
 
-        <h2>Ver Reportes</h2>
-        <form action="ver_reportes.php" method="GET">
-            <label for="sede">Sede:</label>
-            <select id="sede" name="sede">
-                <option value="Restrepo">Restrepo</option>
-                <option value="Primera de Mayo">Primera de Mayo</option>
-                <option value="Galerías">Galerías</option>
-                <option value="Chía">Chía</option>
-            </select>
+    <h2>Ver Reportes</h2>
+    <form action="ver_reportes.php" method="GET">
+        <label for="sede">Sede:</label>
+        <select id="sede" name="sede">
+            <option value="Restrepo">Restrepo</option>
+            <option value="Primera de Mayo">Primera de Mayo</option>
+            <option value="Galerías">Galerías</option>
+            <option value="Chía">Chía</option>
+        </select>
 
-            <label for="fecha_inicio">Desde:</label>
-            <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        <label for="fecha_inicio">Desde:</label>
+        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
 
-            <label for="fecha_fin">Hasta:</label>
-            <input type="date" id="fecha_fin" name="fecha_fin" required>
+        <label for="fecha_fin">Hasta:</label>
+        <input type="date" id="fecha_fin" name="fecha_fin" required>
 
-            <input type="submit" value="Ver Reporte">
-        </form>
-    </div>
+        <input type="submit" value="Ver Reporte">
+    </form>
+
+    <!-- Botón de cerrar sesión -->
+    <a href="logout.php" class="logout-button">Cerrar Sesión</a>
 </body>
 </html>

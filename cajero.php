@@ -42,6 +42,9 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 2) {
 
             <input type="submit" value="Generar Reporte">
         </form>
+
+        <!-- Botón de cerrar sesión -->
+        <a href="logout.php" class="logout-button">Cerrar Sesión</a>
     </div>
 </body>
 </html>

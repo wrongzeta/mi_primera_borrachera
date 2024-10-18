@@ -1,6 +1,10 @@
 <?php
-session_start();
+session_start(); // Iniciar la sesión
+
+// Destruir la sesión
 session_destroy();
-header("Location: login.html");
+
+// Redirigir al index
+header("Location: index.html");
 exit();
 ?>
