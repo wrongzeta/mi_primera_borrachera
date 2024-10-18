@@ -1,37 +1,82 @@
+/* Estilos generales */
 body {
+    background-color: #1a1a2e; /* Fondo oscuro */
+    color: #f5f5f5; /* Texto blanco suave */
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-h1, h2 {
-    color: #333;
+/* Contenedor principal que alberga el logo y el formulario */
+.container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 100vh;
+    align-items: center; /* Centramos verticalmente */
 }
 
-form {
+/* Logo a la izquierda */
+.logo-container {
+    flex: 1;
+    text-align: left; /* Alineamos a la izquierda */
+}
+
+.logo-container img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Formulario a la derecha */
+.login-container {
+    flex: 1;
+    background-color: #16213e; /* Fondo del formulario */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    margin-left: auto; /* Alinea a la derecha */
+}
+
+/* Títulos */
+h2 {
     margin-bottom: 20px;
+    color: #e94560; /* Rojo vibrante para resaltar */
 }
 
-label {
-    display: block;
-    margin: 10px 0 5px;
-}
-
-input[type="text"],
-input[type="number"],
-select {
+/* Campos de entrada */
+input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0f3460; /* Bordes azules */
+    border-radius: 5px;
+    background-color: #0f3460; /* Fondo de campos */
+    color: #f5f5f5;
 }
 
+/* Botón de enviar */
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    width: 100%;
+    padding: 10px;
+    background-color: #e94560; /* Botón rojo vibrante */
     border: none;
-    padding: 10px 15px;
+    border-radius: 5px;
+    color: #f5f5f5;
     cursor: pointer;
+    font-size: 16px;
 }
 
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #f05969; /* Efecto hover más claro */
+}
+
+form {
+    margin-right: 20px; /* Aumenta este valor para dar más espacio al margen derecho */
+    padding: 20px; 
+    border-radius: 10px;
+    right: 50px; /* Mueve todo el formulario hacia la izquierda (reduce este valor si es demasiado) */
 }
