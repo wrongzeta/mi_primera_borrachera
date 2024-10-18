@@ -17,29 +17,31 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 2) {
     <link rel="stylesheet" href="styles_cajero.css"> <!-- Archivo de estilos para cajero -->
 </head>
 <body>
-    <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?></h1>
-    <p>Aquí puedes gestionar los pagos y ver reportes.</p>
+    <div class="form-container">
+        <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?></h1>
+        <p>Aquí puedes gestionar los pagos y ver reportes.</p>
 
-    <h2>Registrar Pago</h2>
-    <form action="registrar_pago.php" method="POST">
-        <label for="pedido_id">ID del Pedido:</label>
-        <input type="number" id="pedido_id" name="pedido_id" required>
+        <h2>Registrar Pago</h2>
+        <form action="registrar_pago.php" method="POST">
+            <label for="pedido_id">ID del Pedido:</label>
+            <input type="number" id="pedido_id" name="pedido_id" required>
 
-        <label for="monto">Monto a pagar:</label>
-        <input type="number" id="monto" name="monto" required>
+            <label for="monto">Monto a pagar:</label>
+            <input type="number" id="monto" name="monto" required>
 
-        <input type="submit" value="Registrar Pago">
-    </form>
+            <input type="submit" value="Registrar Pago">
+        </form>
 
-    <h2>Generar Reporte</h2>
-    <form action="generar_reporte.php" method="GET">
-        <label for="fecha_inicio">Desde:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+        <h2>Generar Reporte</h2>
+        <form action="generar_reporte.php" method="GET">
+            <label for="fecha_inicio">Desde:</label>
+            <input type="date" id="fecha_inicio" name="fecha_inicio" required>
 
-        <label for="fecha_fin">Hasta:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" required>
+            <label for="fecha_fin">Hasta:</label>
+            <input type="date" id="fecha_fin" name="fecha_fin" required>
 
-        <input type="submit" value="Generar Reporte">
-    </form>
+            <input type="submit" value="Generar Reporte">
+        </form>
+    </div>
 </body>
 </html>
