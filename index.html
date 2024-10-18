@@ -3,29 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Mi Primera Borrachera</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mi Primera Borrachera</title>
+    <link rel="stylesheet" href="styles_index.css">
 </head>
 <body>
     <div class="container">
-        <!-- Logo a la izquierda -->
+        <!-- Logo en la parte superior -->
         <div class="logo-container">
-            <img src="logo.png" alt="Logo Mi Primera Borrachera">
+            <img src="logo.png" alt="Logo Mi Primera Borrachera" class="logo">
         </div>
 
-        <!-- Formulario a la derecha -->
-        <div class="login-container">
-            <h2>Iniciar sesión</h2>
-            <form action="login.php" method="POST">
-                <label for="nombre">Nombre de usuario:</label>
-                <input type="text" id="nombre" name="nombre" required>
-
-                <label for="contraseña">Contraseña:</label>
-                <input type="password" id="contraseña" name="contraseña" required>
-
-                <input type="submit" value="Iniciar sesión">
-            </form>
+        <h1>Bienvenido a Mi Primera Borrachera</h1>
+        <p>¡Disfruta de una experiencia inolvidable!</p>
+        
+        <!-- Aquí puedes agregar más contenido relevante para tu página de inicio -->
+        
+        <div class="login-link">
+            <a href="login.php">Iniciar sesión</a>
         </div>
     </div>
+
+    <script>
+        // Comprueba si hay un parámetro de error en la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            alert('Usuario o contraseña incorrectos.');
+        }
+    </script>
 </body>
 </html>

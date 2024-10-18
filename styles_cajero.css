@@ -1,10 +1,9 @@
 body {
+    background-color: #1a1a2e; /* Fondo oscuro */
+    color: #f5f5f5; /* Texto blanco suave */
     font-family: Arial, sans-serif;
-    background-color: #0B1A35;
-    color: #FFFFFF;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
     height: 100vh;
     margin: 0;
     padding-left: 20%;

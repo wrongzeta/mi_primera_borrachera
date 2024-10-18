@@ -45,7 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             exit();
         } else {
-            echo "Contraseña incorrecta.";
+            // Redirige a index.html con un parámetro de error
+            header("Location: index.html?error=1");
+            exit();
         }
     } else {
         echo "No se encontró el usuario.";
@@ -54,3 +56,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $conn->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mi Primera Borrachera</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Logo a la izquierda -->
+        <div class="logo-container">
+            <img src="logo.png" alt="Logo Mi Primera Borrachera">
+        </div>
+
+        <!-- Formulario a la derecha -->
+        <div class="login-container">
+            <h2>Iniciar sesión</h2>
+            <form action="login.php" method="POST">
+                <label for="nombre">Nombre de usuario:</label>
+                <input type="text" id="nombre" name="nombre" required>
+
+                <label for="contraseña">Contraseña:</label>
+                <input type="password" id="contraseña" name="contraseña" required>
+
+                <input type="submit" value="Iniciar sesión">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
