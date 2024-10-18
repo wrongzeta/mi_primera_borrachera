@@ -1,0 +1,4 @@
+cd C:/XAMPP/htdocs/Miprimeraborrachera 
+git add .
+git commit -m "Titulo Actualizacion"
+git push origin master
