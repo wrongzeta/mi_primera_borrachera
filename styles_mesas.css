@@ -1,0 +1,83 @@
+/* styles_mesas.css */
+
+/* Estilos generales */
+body {
+    background-color: #0B1A35; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Estilo del encabezado */
+h1 {
+    color: #FF4C61; /* Color vibrante para el encabezado */
+    text-align: center;
+    margin-bottom: 20px; /* Espacio debajo del encabezado */
+}
+
+/* Estilos para la lista de mesas */
+ul {
+    list-style-type: none; /* Quitar viñetas */
+    padding: 0;
+}
+
+/* Estilo para cada mesa */
+li {
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid #FFFFFF; /* Añadir borde blanco */
+    border-radius: 5px; /* Esquinas redondeadas */
+    margin-bottom: 10px; /* Espacio entre mesas */
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo ligero para cada mesa */
+}
+
+/* Estilo de los botones */
+button {
+    background-color: #2E8BC0; /* Azul para botones */
+    color: #FFFFFF; /* Texto blanco */
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Efecto hover en los botones */
+button:hover {
+    background-color: #FF6A80; /* Color más claro en hover */
+}
+
+/* Deshabilitar botón */
+button[disabled] {
+    background-color: #555; /* Color gris para botón deshabilitado */
+    cursor: not-allowed;
+}
+
+/* Estilo adicional para mensajes de error */
+.alert {
+    color: #FF4C61; /* Color vibrante para mensajes de error */
+    text-align: center;
+    margin-top: 20px; /* Espacio en la parte superior */
+}
+
+/* Estilo de los botones */
+input[type="submit"] {
+    background-color: #FF4C61; /* Color vibrante */
+    color: #FFFFFF; /* Texto blanco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0; /* Margen entre botones */
+    font-size: 1em; /* Tamaño de texto del botón */
+}
+
+/* Efecto hover para botones */
+input[type="submit"]:hover {
+    background-color: #FF6A80; /* Resaltado en hover */
+}

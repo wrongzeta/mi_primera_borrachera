@@ -54,8 +54,9 @@ form {
 
 /* Estilo de las imágenes */
 .producto-item img {
-    max-width: 100%; /* Imagen responsiva */
-    height: auto; /* Mantener proporción */
+    width: 100px; /* Ancho fijo para todas las imágenes */
+    height: 100px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Mantiene la proporción y recorta si es necesario */
     border-radius: 5px; /* Bordes redondeados en imágenes */
 }
 

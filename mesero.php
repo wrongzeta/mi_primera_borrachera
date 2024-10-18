@@ -32,25 +32,42 @@ $productos = $query->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz del Mesero</title>
     <link rel="stylesheet" href="styles_mesero.css"> 
+    <script>
+        function validarFormulario() {
+            let productos = document.querySelectorAll('input[type="number"]');
+            for (let i = 0; i < productos.length; i++) {
+                if (productos[i].value < 0) {
+                    alert("La cantidad no puede ser negativa.");
+                    return false;
+                }
+            }
+            return true; // Permitir el envío si todas las validaciones pasan
+        }
+    </script>
 </head>
 <body>
-    <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?></h1>
+    <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?></h1>
     <p>Aquí puedes gestionar los pedidos.</p>
 
+    <?php
+    // Mostrar mensaje de error si existe
+    if (isset($_SESSION['mensaje_error'])) {
+        echo "<div style='color: red;'>" . htmlspecialchars($_SESSION['mensaje_error']) . "</div>";
+        unset($_SESSION['mensaje_error']); // Limpiar el mensaje después de mostrarlo
+    }
+    ?>
+
     <h2>Tomar Pedido</h2>
-    <form action="procesar_pedido.php" method="POST">
+    <form action="procesar_pedido.php" method="POST" onsubmit="return validarFormulario();">
         <div class="productos-grid">
             <?php
             // Mostrar los productos en la cuadrícula
             foreach ($productos as $producto) {
-                // Obtener la imagen directamente de la base de datos
-                $imagen = $producto['imagen'];
-
                 echo "<div class='producto-item'>";
                 echo "<input type='checkbox' id='producto_" . $producto['id'] . "' name='productos[" . $producto['id'] . "][id]' value='" . $producto['id'] . "'>";
                 echo "<label for='producto_" . $producto['id'] . "'>";
-                echo "<img src='" . $imagen . "' alt='" . $producto['nombre'] . "' style='width:100px;height:auto;'><br>"; // Mostrar la imagen
-                echo "<strong>" . $producto['nombre'] . "</strong><br>";
+                echo "<img src='" . $producto['imagen'] . "' alt='" . htmlspecialchars($producto['nombre']) . "'><br>"; // Mostrar la imagen
+                echo "<strong>" . htmlspecialchars($producto['nombre']) . "</strong><br>";
                 echo "Precio: $" . number_format($producto['precio'], 2) . "<br>";
                 echo "</label>";
                 echo "<label for='cantidad_" . $producto['id'] . "'>Cantidad:</label>";
@@ -70,7 +87,7 @@ $productos = $query->fetchAll(PDO::FETCH_ASSOC);
         if (isset($_SESSION['pedido']) && !empty($_SESSION['pedido'])) {
             echo "<ul>";
             foreach ($_SESSION['pedido'] as $id => $detalle) {
-                echo "<li>" . $detalle['nombre'] . " - Cantidad: " . $detalle['cantidad'] . " - Precio: $" . number_format($detalle['precio'] * $detalle['cantidad'], 2) . "</li>";
+                echo "<li>" . htmlspecialchars($detalle['nombre']) . " - Cantidad: " . $detalle['cantidad'] . " - Precio: $" . number_format($detalle['precio'] * $detalle['cantidad'], 2) . "</li>";
             }
             echo "</ul>";
             echo "<strong>Total: $" . number_format(array_sum(array_column($_SESSION['pedido'], 'subtotal')), 2) . "</strong>";

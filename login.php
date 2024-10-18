@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];
     $contraseña = $_POST['contraseña'];
 
-    // Consulta para buscar al usuario
+    // Consulta para buscar al usuario, incluyendo el sede_id
     $sql = "SELECT * FROM usuarios WHERE username = ?"; // Asegúrate de que 'username' es correcto
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $nombre);
@@ -34,10 +34,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Contraseña correcta, iniciar sesión
             $_SESSION['usuario'] = $usuario['username']; // Cambié 'nombre' a 'username'
             $_SESSION['rol'] = $usuario['rol_id']; // Suponiendo que 'rol_id' es el nombre de la columna del rol
+            $_SESSION['sede_id'] = $usuario['sede_id']; // Asigna el sede_id a la sesión
 
             // Redirige a la página correspondiente según el rol
             if ($_SESSION['rol'] === 1) { // Asumiendo que 1 es el ID del rol de mesero
-                header("Location: mesero.php");
+                header("Location: pagina_mesas.php");
             } elseif ($_SESSION['rol'] === 2) { // Asumiendo que 2 es el ID del rol de cajero
                 header("Location: cajero.php"); // Cambia a la ruta de tu página del cajero
             } else {
