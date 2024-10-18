@@ -14,7 +14,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) { // Cambia 1 si el 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz del Mesero</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Si tienes estilos -->
+    <link rel="stylesheet" href="styles_mesero.css"> <!-- Si tienes estilos -->
 </head>
 <body>
     <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?></h1>
