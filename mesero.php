@@ -20,15 +20,6 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
 
-$mesa_seleccionada = $_SESSION['mesa'];
-
-// Asegurarse de que hay una mesa seleccionada
-if (!isset($_SESSION['mesa'])) {
-    echo "<div style='color: red;'>No has seleccionado una mesa.</div>";
-    exit(); // Salir si no hay mesa seleccionada
-}
-
-$mesa_numero = $_SESSION['mesa'];
 ?>
 
 <!DOCTYPE html>

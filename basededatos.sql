@@ -4,29 +4,19 @@ CREATE DATABASE mi_primera_borrachera;
 -- Usar la base de datos
 USE mi_primera_borrachera;
 
--- Tabla para almacenar sedes
+-- Tabla de sedes
 CREATE TABLE sedes (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL UNIQUE,
-    direccion VARCHAR(255) NOT NULL
+    nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Tabla para almacenar roles de usuario
+-- Tabla de roles
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE
 );
 
--- Tabla para almacenar mesas
-CREATE TABLE mesas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero INT NOT NULL,
-    estado ENUM('libre', 'ocupado') DEFAULT 'libre',
-    sede_id INT,
-    FOREIGN KEY (sede_id) REFERENCES sedes(id)
-);
-
--- Tabla para almacenar usuarios
+-- Tabla de usuarios
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
@@ -37,29 +27,38 @@ CREATE TABLE usuarios (
     FOREIGN KEY (sede_id) REFERENCES sedes(id)
 );
 
--- Tabla para almacenar productos
-CREATE TABLE `productos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `precio` decimal(10,2) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `imagen` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+-- Tabla de mesas
+CREATE TABLE mesas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL,
+    estado ENUM('libre', 'ocupada') DEFAULT 'libre',
+    sede_id INT,
+    FOREIGN KEY (sede_id) REFERENCES sedes(id)
 );
 
+-- Tabla de productos
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
+    cantidad INT NOT NULL,
+    imagen VARCHAR(255) -- Campo para la ruta de la imagen
+);
 
--- Tabla para almacenar pedidos
+-- Tabla de pedidos
 CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT,
     mesa_id INT,
+    sede_id INT,
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     estado ENUM('pendiente', 'cerrado') DEFAULT 'pendiente',
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (mesa_id) REFERENCES mesas(id)
+    FOREIGN KEY (mesa_id) REFERENCES mesas(id),
+    FOREIGN KEY (sede_id) REFERENCES sedes(id)
 );
 
--- Tabla para almacenar los detalles de cada pedido
+-- Tabla de detalles de pedido
 CREATE TABLE detalles_pedido (
     id INT AUTO_INCREMENT PRIMARY KEY,
     pedido_id INT,
@@ -73,28 +72,28 @@ CREATE TABLE detalles_pedido (
 INSERT INTO roles (nombre) VALUES ('mesero'), ('cajero'), ('admin');
 
 -- Insertar sedes
-INSERT INTO sedes (nombre, direccion) VALUES 
-('Restrepo', 'Dirección Restrepo'),
-('Primera de Mayo', 'Dirección Primera de Mayo'),
-('Galerías', 'Dirección Galerías'),
-('Chía', 'Dirección Chía');
+INSERT INTO sedes (nombre) VALUES ('Restrepo'), ('Primera de Mayo'), ('Galerías'), ('Chía');
+
+--Primera ejecucion SQL hasta aca
 
 -- Insertar mesas
 INSERT INTO mesas (numero, estado, sede_id) VALUES 
 (1, 'libre', 1),
-(2, 'ocupado', 1),
+(2, 'libre', 1),
 (3, 'libre', 2),
-(4, 'ocupado', 2),
+(4, 'libre', 2),
 (5, 'libre', 3),
 (6, 'libre', 3),
-(7, 'ocupado', 4),
+(7, 'libre', 4),
 (8, 'libre', 4);
 
 -- Insertar usuarios con contraseñas hasheadas
 INSERT INTO `usuarios` (`username`, `password`, `rol_id`, `sede_id`) VALUES
 ('admin', '$2y$10$mvKM8u6CpdPyYujOrYOm6.kdibfG700P7l5jBIKxhT/wta1ANtFm.', 3, 1), -- Contraseña: admin2024
 ('David', '$2y$10$g5PVsK55BXOvk1QfiY8nNe3BxoEcJXb6TutaOEopEdbbUaJVbzX.W', 1, 1), -- Contraseña: Juanda2020
-('JuanDavid', '$2y$10$bxabe.hMXbfnMStpY7Rz9.xXQV8/4HFKoeRstpzcWv0sKfYocIA.m', 2, 1); -- Contraseña: DavidContra123
+('JuanDavid', '$2y$10$bxabe.hMXbfnMStpY7Rz9.xXQV8/4HFKoeRstpzcWv0sKfYocIA.m', 2, 1), -- Contraseña: DavidContra123
+('Carlos', '$2y$10$0R.8Jf/8nHrAzeqWUEvtoehy8HGG47cjCyvLMBm/nK97vsQGOMkUO', 1, 2), -- Contraseña: Mesero2024
+('Sofia', '$2y$10$WoBjDNcEiqcruEYsTfUfb.qgTtAtB8v/uExGwZLu.arvR2vJDJZzO', 1, 3); -- Contraseña: Sofia2024
 
 
 INSERT INTO `productos` (`id`, `nombre`, `precio`, `cantidad`, `imagen`) VALUES

@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Redirige a la página correspondiente según el rol
             if ($_SESSION['rol'] === 1) { // Asumiendo que 1 es el ID del rol de mesero
-                header("Location: pagina_mesas.php");
+                header("Location: mesero.php");
             } elseif ($_SESSION['rol'] === 2) { // Asumiendo que 2 es el ID del rol de cajero
                 header("Location: cajero.php"); // Cambia a la ruta de tu página del cajero
             } else {
