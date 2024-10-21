@@ -50,12 +50,10 @@ CREATE TABLE pedidos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     usuario_id INT,
     mesa_id INT,
-    sede_id INT,
     fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
     estado ENUM('pendiente', 'cerrado') DEFAULT 'pendiente',
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
-    FOREIGN KEY (mesa_id) REFERENCES mesas(id),
-    FOREIGN KEY (sede_id) REFERENCES sedes(id)
+    FOREIGN KEY (mesa_id) REFERENCES mesas(id)
 );
 
 -- Tabla de detalles de pedido

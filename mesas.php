@@ -38,7 +38,7 @@ function mostrarMesas($mesas) {
     foreach ($mesas as $mesa) {
         $color = ($mesa['estado'] === 'libre') ? 'green' : 'red';
         echo "<li style='color: $color;'>Mesa " . htmlspecialchars($mesa['numero']) . " - " . htmlspecialchars($mesa['estado']) . 
-              "<form action='procesar_pedido.php' method='post' style='display:inline;' onsubmit='return confirm(\"¿Estás seguro de seleccionar esta mesa?\");'>
+              "<form action='procesar_mesa.php' method='post' style='display:inline;' onsubmit='return confirm(\"¿Estás seguro de seleccionar esta mesa?\");'>
                 <input type='hidden' name='mesa' value='" . htmlspecialchars($mesa['numero']) . "'>
                 <button type='submit'>Seleccionar</button>
               </form>
@@ -46,6 +46,7 @@ function mostrarMesas($mesas) {
     }
     echo "</ul>";
 }
+
 ?>
 
 <!DOCTYPE html>

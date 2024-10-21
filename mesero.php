@@ -3,7 +3,7 @@ session_start();
 
 // Verificar si el usuario ha iniciado sesión y tiene el rol de mesero
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) {
-    header("Location: index.html"); // Redirige a la página de inicio de sesión si no está autenticado
+    header("Location: index.html");
     exit();
 }
 
@@ -22,11 +22,16 @@ try {
 
 // Obtener el número de mesa de la sesión
 if (!isset($_SESSION['mesa'])) {
-    header("Location: pagina_mesas.php"); // Redirigir si no hay mesa seleccionada
+    header("Location: mesas.php");
     exit();
 }
 
 $mesa_numero = $_SESSION['mesa'];
+
+// Obtener el pedido actual de la base de datos
+$query = $pdo->prepare("SELECT p.id, p.fecha, dp.producto_id, dp.cantidad, pr.nombre, pr.precio FROM pedidos p LEFT JOIN detalles_pedido dp ON p.id = dp.pedido_id LEFT JOIN productos pr ON dp.producto_id = pr.id WHERE p.mesa_id = (SELECT id FROM mesas WHERE numero = :numero) AND p.estado = 'pendiente'");
+$query->execute(['numero' => $mesa_numero]);
+$pedido_actual = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -53,19 +58,29 @@ $mesa_numero = $_SESSION['mesa'];
     <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?></h1>
     <p>Aquí puedes gestionar los pedidos.</p>
 
+    <!-- Botón para volver a las mesas -->
+    <form action="mesas.php" method="GET">
+        <input type="submit" value="Volver a Mesas">
+    </form>
+
+    <!-- Botón para cerrar sesión -->
+    <form action="logout.php" method="POST">
+        <input type="submit" value="Cerrar Sesión">
+    </form>
+
     <h2>Estás en la mesa número: <?php echo htmlspecialchars($mesa_numero); ?></h2>
 
     <?php
     // Mostrar mensaje de error si existe
     if (isset($_SESSION['mensaje_error'])) {
         echo "<div style='color: red;'>" . htmlspecialchars($_SESSION['mensaje_error']) . "</div>";
-        unset($_SESSION['mensaje_error']); // Limpiar el mensaje después de mostrarlo
+        unset($_SESSION['mensaje_error']);
     }
     ?>
 
     <h2>Tomar Pedido</h2>
     <form action="procesar_pedido.php" method="POST" onsubmit="return validarFormulario();">
-        <input type="hidden" name="mesa" value="<?php echo htmlspecialchars($mesa_numero); ?>"> <!-- Agregar el número de mesa oculto -->
+        <input type="hidden" name="mesa" value="<?php echo htmlspecialchars($mesa_numero); ?>">
         <div class="productos-grid">
             <?php
             // Obtener los productos de la base de datos
@@ -77,45 +92,29 @@ $mesa_numero = $_SESSION['mesa'];
                 echo "<div class='producto-item'>";
                 echo "<input type='checkbox' id='producto_" . $producto['id'] . "' name='productos[" . $producto['id'] . "][id]' value='" . $producto['id'] . "'>";
                 echo "<label for='producto_" . $producto['id'] . "'>";
-                echo "<img src='" . htmlspecialchars($producto['imagen']) . "' alt='" . htmlspecialchars($producto['nombre']) . "'><br>"; // Mostrar la imagen
+                echo "<img src='" . htmlspecialchars($producto['imagen']) . "' alt='" . htmlspecialchars($producto['nombre']) . "'><br>";
                 echo "<strong>" . htmlspecialchars($producto['nombre']) . "</strong><br>";
                 echo "Precio: $" . number_format($producto['precio'], 2) . "<br>";
+                echo "Cantidad: <input type='number' name='productos[" . $producto['id'] . "][cantidad]' value='0' min='0'>";
                 echo "</label>";
-                echo "<label for='cantidad_" . $producto['id'] . "'>Cantidad:</label>";
-                echo "<input type='number' id='cantidad_" . $producto['id'] . "' name='productos[" . $producto['id'] . "][cantidad]' min='0' value='0'><br>";
                 echo "</div>";
             }
             ?>
         </div>
-        <br>
-        <input type="submit" value="Agregar a Pedido">
+        <input type="submit" value="Enviar Pedido">
     </form>
 
-    <h2>Ver Pedido</h2>
-    <div id="pedido-actual">
-        <?php
-        // Mostrar el pedido actual si hay productos en la sesión
-        if (isset($_SESSION['pedido']) && !empty($_SESSION['pedido'])) {
-            echo "<ul>";
-            foreach ($_SESSION['pedido'] as $id => $detalle) {
-                echo "<li>" . htmlspecialchars($detalle['nombre']) . " - Cantidad: " . $detalle['cantidad'] . " - Precio: $" . number_format($detalle['precio'] * $detalle['cantidad'], 2) . "</li>";
-            }
-            echo "</ul>";
-            echo "<strong>Total: $" . number_format(array_sum(array_column($_SESSION['pedido'], 'subtotal')), 2) . "</strong>";
-        } else {
-            echo "<p>No hay productos en el pedido actual.</p>";
-        }
-        ?>
-    </div>
-
-    <!-- Botón para volver a las mesas -->
-    <form action="pagina_mesas.php" method="GET">
-        <input type="submit" value="Volver a Mesas">
-    </form>
-
-    <!-- Botón para cerrar sesión -->
-    <form action="logout.php" method="POST">
-        <input type="submit" value="Cerrar Sesión">
-    </form>
+    <h2>Pedido Actual</h2>
+    <?php if (empty($pedido_actual)): ?>
+        <p>No hay pedidos para esta mesa.</p>
+    <?php else: ?>
+        <ul>
+            <?php foreach ($pedido_actual as $pedido): ?>
+                <li>
+                    <?php echo htmlspecialchars($pedido['nombre']) . " (Cantidad: " . $pedido['cantidad'] . ") - Precio: $" . number_format($pedido['precio'], 2); ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </body>
 </html>
