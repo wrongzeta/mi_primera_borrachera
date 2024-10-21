@@ -112,3 +112,14 @@ input[type="submit"]:hover {
         grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Columnas más pequeñas en pantallas pequeñas */
     }
 }
+
+/* Estilos para el contenedor de botones */
+div {
+    margin-bottom: 20px; /* Espaciado inferior */
+}
+
+/* Estilos para los botones */
+form input[type="submit"] {
+    padding: 10px 15px; /* Ajusta el tamaño del botón */
+    font-size: 1em; /* Tamaño de texto del botón */
+}

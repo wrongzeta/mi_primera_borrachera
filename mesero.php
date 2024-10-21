@@ -58,15 +58,17 @@ $pedido_actual = $query->fetchAll(PDO::FETCH_ASSOC);
     <h1>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario']); ?></h1>
     <p>Aquí puedes gestionar los pedidos.</p>
 
-    <!-- Botón para volver a las mesas -->
-    <form action="mesas.php" method="GET">
-        <input type="submit" value="Volver a Mesas">
-    </form>
+    <div style="display: flex; justify-content: space-between; width: 100%; max-width: 800px;">
+        <!-- Botón para volver a las mesas -->
+        <form action="mesas.php" method="GET">
+            <input type="submit" value="Volver a Mesas">
+        </form>
 
-    <!-- Botón para cerrar sesión -->
-    <form action="logout.php" method="POST">
-        <input type="submit" value="Cerrar Sesión">
-    </form>
+        <!-- Botón para cerrar sesión -->
+        <form action="logout.php" method="POST">
+            <input type="submit" value="Cerrar Sesión">
+        </form>
+    </div>
 
     <h2>Estás en la mesa número: <?php echo htmlspecialchars($mesa_numero); ?></h2>
 
