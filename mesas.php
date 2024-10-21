@@ -1,6 +1,12 @@
 <?php
 session_start();
 
+// Verificar si el usuario ha iniciado sesión y tiene un sede_id
+if (!isset($_SESSION['usuario']) || !isset($_SESSION['sede_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
 // Conectar a la base de datos
 $host = 'localhost';
 $db   = 'mi_primera_borrachera';
@@ -15,7 +21,7 @@ try {
 }
 
 // Obtener las mesas de la sede correspondiente al mesero
-$sede_id = $_SESSION['sede_id']; // Asegúrate de que esto esté configurado al iniciar sesión
+$sede_id = $_SESSION['sede_id'];
 // Obtener las mesas y su estado en función de los pedidos
 $query = $pdo->prepare("
     SELECT mesas.numero, 
@@ -26,22 +32,20 @@ $query = $pdo->prepare("
 $query->execute(['sede_id' => $sede_id]);
 $mesas = $query->fetchAll(PDO::FETCH_ASSOC);
 
-
 // Función para mostrar el estado de las mesas
 function mostrarMesas($mesas) {
     echo "<ul>";
     foreach ($mesas as $mesa) {
         $color = ($mesa['estado'] === 'libre') ? 'green' : 'red';
-        echo "<li style='color: $color;'>Mesa " . $mesa['numero'] . " - " . $mesa['estado'] . 
-              "<form action='procesar_pedido.php' method='post' style='display:inline;'>
-                <input type='hidden' name='mesa' value='" . $mesa['numero'] . "'>
-                <button type='submit'>Seleccionar</button> <!-- Remover la condición de deshabilitar -->
+        echo "<li style='color: $color;'>Mesa " . htmlspecialchars($mesa['numero']) . " - " . htmlspecialchars($mesa['estado']) . 
+              "<form action='procesar_pedido.php' method='post' style='display:inline;' onsubmit='return confirm(\"¿Estás seguro de seleccionar esta mesa?\");'>
+                <input type='hidden' name='mesa' value='" . htmlspecialchars($mesa['numero']) . "'>
+                <button type='submit'>Seleccionar</button>
               </form>
               </li>";
     }
     echo "</ul>";
 }
-
 ?>
 
 <!DOCTYPE html>

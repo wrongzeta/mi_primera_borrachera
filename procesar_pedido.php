@@ -36,17 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mesa'])) {
         if ($mesa['estado'] === 'ocupado') {
             // Lógica para agregar más productos al pedido existente
             echo "Mesa " . htmlspecialchars($mesa_numero) . " está ocupada. Puedes agregar más productos.";
-            // Aquí puedes redirigir a una página donde se pueda agregar más productos
+            // Redirigir a una página donde se pueda agregar más productos (por ejemplo, mesero.php)
+            header("Location: mesero.php?mesa=$mesa_numero");
+            exit();
         } else {
             // Lógica para iniciar un nuevo pedido
             echo "Mesa " . htmlspecialchars($mesa_numero) . " está libre. Puedes iniciar un nuevo pedido.";
-            // Aquí puedes redirigir a una página para crear un nuevo pedido
+            // Redirigir a una página para crear un nuevo pedido (por ejemplo, mesero.php)
+            header("Location: mesero.php?mesa=$mesa_numero");
+            exit();
         }
     } else {
-        echo "Mesa no encontrada.";
+        $mensaje_error .= "Mesa no encontrada.";
     }
 } else {
-    echo "No se ha seleccionado ninguna mesa.";
+    $mensaje_error .= "No se ha seleccionado ninguna mesa.";
 }
 
 // Verificar si se enviaron productos en el formulario

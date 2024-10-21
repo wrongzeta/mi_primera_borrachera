@@ -2,8 +2,8 @@
 session_start();
 
 // Verificar si el usuario ha iniciado sesión y tiene el rol de mesero
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1 || !isset($_SESSION['mesa'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) {
+    header("Location: index.html"); // Redirige a la página de inicio de sesión si no está autenticado
     exit();
 }
 
@@ -20,6 +20,13 @@ try {
     die("Error de conexión: " . $e->getMessage());
 }
 
+// Obtener el número de mesa de la sesión
+if (!isset($_SESSION['mesa'])) {
+    header("Location: pagina_mesas.php"); // Redirigir si no hay mesa seleccionada
+    exit();
+}
+
+$mesa_numero = $_SESSION['mesa'];
 ?>
 
 <!DOCTYPE html>
@@ -58,7 +65,7 @@ try {
 
     <h2>Tomar Pedido</h2>
     <form action="procesar_pedido.php" method="POST" onsubmit="return validarFormulario();">
-        <input type="hidden" name="mesa" value="<?php echo $mesa_numero; ?>"> <!-- Agregar el número de mesa oculto -->
+        <input type="hidden" name="mesa" value="<?php echo htmlspecialchars($mesa_numero); ?>"> <!-- Agregar el número de mesa oculto -->
         <div class="productos-grid">
             <?php
             // Obtener los productos de la base de datos
@@ -70,7 +77,7 @@ try {
                 echo "<div class='producto-item'>";
                 echo "<input type='checkbox' id='producto_" . $producto['id'] . "' name='productos[" . $producto['id'] . "][id]' value='" . $producto['id'] . "'>";
                 echo "<label for='producto_" . $producto['id'] . "'>";
-                echo "<img src='" . $producto['imagen'] . "' alt='" . htmlspecialchars($producto['nombre']) . "'><br>"; // Mostrar la imagen
+                echo "<img src='" . htmlspecialchars($producto['imagen']) . "' alt='" . htmlspecialchars($producto['nombre']) . "'><br>"; // Mostrar la imagen
                 echo "<strong>" . htmlspecialchars($producto['nombre']) . "</strong><br>";
                 echo "Precio: $" . number_format($producto['precio'], 2) . "<br>";
                 echo "</label>";
