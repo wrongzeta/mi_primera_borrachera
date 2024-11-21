@@ -4,79 +4,68 @@ body {
     color: #f5f5f5; /* Texto blanco suave */
     font-family: Arial, sans-serif;
     margin: 0;
-    height: 100vh;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh; /* Asegura que el footer quede al fondo */
 }
 
 /* Contenedor principal que alberga el logo y el formulario */
 .container {
     display: flex;
-    width: 80%;
-    max-width: 1200px;
-    height: 100vh;
-    align-items: center; /* Centramos verticalmente */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1; /* Permite que el contenedor ocupe el espacio restante */
 }
 
-/* Logo a la izquierda */
-.logo-container {
-    flex: 1;
-    text-align: left; /* Alineamos a la izquierda */
-}
-
+/* Logo */
 .logo-container img {
     max-width: 100%;
     height: auto;
-}
-
-/* Formulario a la derecha */
-.login-container {
-    flex: 1;
-    background-color: #16213e; /* Fondo del formulario */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    max-width: 400px;
-    margin-left: auto; /* Alinea a la derecha */
-}
-
-/* Títulos */
-h2 {
     margin-bottom: 20px;
-    color: #e94560; /* Rojo vibrante para resaltar */
 }
 
-/* Campos de entrada */
-input[type="text"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
+/* Texto de bienvenida */
+.welcome-text h1 {
+    color: #e94560; /* Rojo vibrante */
     margin: 10px 0;
-    border: 1px solid #0f3460; /* Bordes azules */
+}
+
+.welcome-text p {
+    margin: 10px 0;
+}
+
+/* Botón de inicio de sesión */
+.login-btn-container {
+    margin-top: 20px;
+}
+
+.login-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #e94560; /* Rojo vibrante */
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
     border-radius: 5px;
-    background-color: #0f3460; /* Fondo de campos */
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #f05969; /* Hover más claro */
+}
+
+/* Estilos del footer */
+footer {
+    background-color: #16213e;
+    padding: 10px 0;
+    text-align: center;
     color: #f5f5f5;
+    position: relative;
 }
 
-/* Botón de enviar */
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #e94560; /* Botón rojo vibrante */
-    border: none;
-    border-radius: 5px;
-    color: #f5f5f5;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-input[type="submit"]:hover {
-    background-color: #f05969; /* Efecto hover más claro */
-}
-
-form {
-    margin-right: 20px; /* Aumenta este valor para dar más espacio al margen derecho */
-    padding: 20px; 
-    border-radius: 10px;
-    right: 50px; /* Mueve todo el formulario hacia la izquierda (reduce este valor si es demasiado) */
+.footer-content p {
+    margin: 0;
 }

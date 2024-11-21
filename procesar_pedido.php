@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mesa'])) {
     if ($mesa) {
         // Iniciar un nuevo pedido
         $usuario_id = $_SESSION['usuario_id']; // Asegúrate de que tienes el ID del usuario en la sesión
+        $sede_id = $_SESSION['sede_id']; // Suponiendo que el ID de la sede está en la sesión
         $query_pedido = $pdo->prepare("INSERT INTO pedidos (usuario_id, mesa_id) VALUES (:usuario_id, :mesa_id)");
         $query_pedido->execute(['usuario_id' => $usuario_id, 'mesa_id' => $mesa['id']]);
         $pedido_id = $pdo->lastInsertId(); // Obtener el ID del nuevo pedido
@@ -49,18 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mesa'])) {
                 $cantidad = (int)$detalle['cantidad'];
 
                 if ($cantidad > 0) {
-                    // Consultar la cantidad actual del producto en la base de datos
-                    $sql = "SELECT nombre, precio, cantidad FROM productos WHERE id = ?";
+                    // Consultar la cantidad disponible del producto en el inventario de la sede específica
+                    $sql = "SELECT cantidad FROM inventarios WHERE producto_id = ? AND sede_id = ?";
                     $stmt = $pdo->prepare($sql);
-                    $stmt->execute([$id]);
+                    $stmt->execute([$id, $sede_id]);
 
                     if ($stmt->rowCount() > 0) {
-                        $producto_db = $stmt->fetch(PDO::FETCH_ASSOC);
-                        $nombre = $producto_db['nombre'];
-                        $cantidad_disponible = $producto_db['cantidad'];
+                        $inventario_db = $stmt->fetch(PDO::FETCH_ASSOC);
+                        $cantidad_disponible = $inventario_db['cantidad'];
 
                         // Verificar que hay suficiente inventario para el pedido
                         if ($cantidad <= $cantidad_disponible) {
+                            // Consultar el precio y nombre del producto
+                            $sql_producto = "SELECT nombre, precio FROM productos WHERE id = ?";
+                            $stmt_producto = $pdo->prepare($sql_producto);
+                            $stmt_producto->execute([$id]);
+                            $producto_db = $stmt_producto->fetch(PDO::FETCH_ASSOC);
+                            $nombre = $producto_db['nombre'];
                             $precio = $producto_db['precio'];
                             $subtotal = $precio * $cantidad;
 
@@ -69,17 +75,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mesa'])) {
                             $stmt_detalle = $pdo->prepare($sql_detalle);
                             $stmt_detalle->execute([$pedido_id, $id, $cantidad]);
 
-                            // Actualizar la cantidad en la base de datos
+                            // Actualizar la cantidad en el inventario
                             $nueva_cantidad = $cantidad_disponible - $cantidad;
-                            $sql_actualizar = "UPDATE productos SET cantidad = ? WHERE id = ?";
+                            $sql_actualizar = "UPDATE inventarios SET cantidad = ? WHERE producto_id = ? AND sede_id = ?";
                             $stmt_actualizar = $pdo->prepare($sql_actualizar);
-                            $stmt_actualizar->execute([$nueva_cantidad, $id]);
+                            $stmt_actualizar->execute([$nueva_cantidad, $id, $sede_id]);
                         } else {
                             // Acumular el mensaje de error si no hay suficiente stock
                             $mensaje_error .= "No hay suficiente stock para el producto: $nombre. ";
                         }
                     } else {
-                        $mensaje_error .= "El producto con ID $id no existe. ";
+                        $mensaje_error .= "El producto con ID $id no está en el inventario de esta sede. ";
                     }
                 }
             }

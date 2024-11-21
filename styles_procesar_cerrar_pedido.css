@@ -1,0 +1,61 @@
+/* Estilos generales */
+body {
+    background-color: #1a1a2e; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #0B1A35;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    color: #FF4C61; /* Título con color vibrante */
+    text-align: center;
+}
+
+h3 {
+    color: #FF6A80; /* Subtítulos resaltados */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #2E8BC0; /* Azul para las líneas de la tabla */
+}
+
+button {
+    background-color: #2E8BC0; /* Azul para los botones */
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background-color: #1F6B98; /* Azul más oscuro al pasar el ratón */
+}
+
+/* Estilos de formulario */
+form label {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+input[type="radio"] {
+    margin-right: 8px;
+}

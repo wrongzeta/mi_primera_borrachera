@@ -14,37 +14,24 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 2) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz del Cajero</title>
-    <link rel="stylesheet" href="styles_cajero.css"> <!-- Archivo de estilos para cajero -->
+    <link rel="stylesheet" href="styles_cajero.css">
 </head>
 <body>
     <div class="form-container">
         <h1>Bienvenido, <?php echo $_SESSION['usuario']; ?></h1>
-        <p>Aquí puedes gestionar los pagos y ver reportes.</p>
+        <p>Selecciona una opción para continuar.</p>
 
-        <h2>Registrar Pago</h2>
-        <form action="registrar_pago.php" method="POST">
-            <label for="pedido_id">ID del Pedido:</label>
-            <input type="number" id="pedido_id" name="pedido_id" required>
+        <div class="options-container">
+            <!-- Botón para Cierre de Pedidos -->
+            <a href="cerrar_pedido.php" class="logout-button">Cierre de Pedidos</a>
 
-            <label for="monto">Monto a pagar:</label>
-            <input type="number" id="monto" name="monto" required>
+            <!-- Botón para Generar Reporte -->
+            <a href="generar_reporte.php" class="logout-button">Generar Reporte</a>
+        </div>
 
-            <input type="submit" value="Registrar Pago">
-        </form>
-
-        <h2>Generar Reporte</h2>
-        <form action="generar_reporte.php" method="GET">
-            <label for="fecha_inicio">Desde:</label>
-            <input type="date" id="fecha_inicio" name="fecha_inicio" required>
-
-            <label for="fecha_fin">Hasta:</label>
-            <input type="date" id="fecha_fin" name="fecha_fin" required>
-
-            <input type="submit" value="Generar Reporte">
-        </form>
-
-        <!-- Botón de cerrar sesión -->
         <a href="logout.php" class="logout-button">Cerrar Sesión</a>
     </div>
 </body>
 </html>
+
+

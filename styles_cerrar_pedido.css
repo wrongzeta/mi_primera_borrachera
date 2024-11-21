@@ -1,0 +1,106 @@
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a2e; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/* Contenedor principal */
+.container {
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Encabezados */
+h1 {
+    color: #FF4C61; /* Color vibrante */
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #FF6A80; /* Color más claro */
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* Lista de mesas */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo para mesas libres y ocupadas */
+li.libre {
+    background-color: #28a745; /* Verde para mesas libres */
+}
+
+li.ocupado {
+    background-color: #dc3545; /* Rojo para mesas ocupadas */
+    color: white;
+}
+
+/* Estilo para los botones */
+button {
+    background-color: #2E8BC0; /* Azul */
+    color: white;
+    padding: 12px 25px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #1f7a94; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Estilo para el formulario de cerrar sesión */
+form {
+    margin-top: 20px;
+}
+
+form input[type="submit"] {
+    background-color: #FF4C61; /* Rojo */
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #FF6A80; /* Rojo más claro */
+}
+
+/* Botón para procesar pedido */
+button.procesar {
+    background-color: #2E8BC0; /* Azul */
+    margin-top: 15px;
+}
+
+button.procesar:hover {
+    background-color: #1f7a94;
+}

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Primera Borrachera</title>
-    <link rel="stylesheet" href="../Styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -13,15 +13,22 @@
             <img src="logo.png" alt="Logo Mi Primera Borrachera" class="logo">
         </div>
 
-        <h1>Bienvenido a Mi Primera Borrachera</h1>
-        <p>¡Disfruta de una experiencia inolvidable!</p>
-        
-        <!-- Aquí puedes agregar más contenido relevante para tu página de inicio -->
-        
-        <div class="login-link">
-            <a href="login.php">Iniciar sesión</a>
+        <div class="welcome-text">
+            <h1>Bienvenido a Mi Primera Borrachera</h1>
+            <p>¡Disfruta de una experiencia inolvidable!</p>
         </div>
+
+        <!-- Botón de inicio de sesión -->
+        <div class="login-btn-container">
+            <a href="login.php" class="login-btn">Iniciar sesión</a>
+        </div>        
     </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>Desarrollado por FusionCode</p>
+        </div>
+    </footer>
 
     <script>
         // Comprueba si hay un parámetro de error en la URL
@@ -30,12 +37,5 @@
             alert('Usuario o contraseña incorrectos.');
         }
     </script>
-
-    <footer>
-        <div class="footer-content">
-            <p>Desarrollado por FusionCode</p>
-        </div>
-    </footer>
-
 </body>
 </html>
