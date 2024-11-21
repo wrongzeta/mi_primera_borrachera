@@ -104,16 +104,16 @@ INSERT INTO `usuarios` (`username`, `password`, `rol_id`, `sede_id`) VALUES
 ('Sofia', '$2y$10$WoBjDNcEiqcruEYsTfUfb.qgTtAtB8v/uExGwZLu.arvR2vJDJZzO', 1, 3); -- Contraseña: Sofia2024
 
 
-INSERT INTO `productos` (`id`, `nombre`, `precio`, `cantidad`, `imagen`) VALUES
-(25, 'Aguardiente Antioqueño', 50000.00, 177, 'imagenes/aguardiente_antioqueñoazul.jpg'),
-(26, 'Ron Medellín', 60000.00, 144, 'imagenes/ron_medellin.jpg'),
-(27, 'Cerveza Club Colombia', 8000.00, 199, 'imagenes/club_colombia.jpg'),
-(28, 'Whisky Johnnie Walker Black Label', 120000.00, 0, 'imagenes/johnnie_walker.jpg'),
-(29, 'Tequila José Cuervo', 90000.00, 0, 'imagenes/jose_cuervo.jpg'),
-(30, 'Vodka Absolut', 70000.00, 0, 'imagenes/absolut.jpg'),
-(31, 'Cigarros Marlboro', 12000.00, 0, 'imagenes/marlboro.jpg'),
+INSERT INTO `productos` (`id`, `nombre`, `precio`, `imagen`) VALUES
+(25, 'Aguardiente Antioqueño', 50000.00, 'imagenes/aguardiente_antioqueñoazul.jpg'),
+(26, 'Ron Medellín', 60000.00, 'imagenes/ron_medellin.jpg'),
+(27, 'Cerveza Club Colombia', 8000.00, 'imagenes/club_colombia.jpg'),
+(28, 'Whisky Johnnie Walker Black Label', 120000.00, 'imagenes/johnnie_walker.jpg'),
+(29, 'Tequila José Cuervo', 90000.00, 'imagenes/jose_cuervo.jpg'),
+(30, 'Vodka Absolut', 70000.00, 'imagenes/absolut.jpg'),
+(31, 'Cigarros Marlboro', 12000.00, 'imagenes/marlboro.jpg'),
 (32, 'Cigarros Lucky', 11000.00, 0, 'imagenes/lucky.jpg'),
-(33, 'Paquete de Tabaco Pielroja', 6000.00, 0, 'imagenes/pielroja.jpg'),
-(34, 'Cerveza Águila', 7000.00, 0, 'imagenes/aguila.jpg'),
-(35, 'Cerveza Poker', 6500.00, 0, 'imagenes/poker.jpg'),
-(36, 'Cerveza Corona', 10000.00, 0, 'imagenes/corona.jpg');
+(33, 'Paquete de Tabaco Pielroja', 6000.00, 'imagenes/pielroja.jpg'),
+(34, 'Cerveza Águila', 7000.00, 'imagenes/aguila.jpg'),
+(35, 'Cerveza Poker', 6500.00, 'imagenes/poker.jpg'),
+(36, 'Cerveza Corona', 10000.00, 'imagenes/corona.jpg');
