@@ -1,4 +1,4 @@
-/* Estilos generales */
+/* Estilos generales para la página de inicio de sesión */
 body {
     background-color: #1a1a2e; /* Fondo oscuro */
     color: #f5f5f5; /* Texto blanco suave */
@@ -6,50 +6,45 @@ body {
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Coloca el contenido al inicio */
+    justify-content: flex-start;
     min-height: 100vh; /* Asegura que el footer quede al fondo */
 }
 
 /* Contenedor principal que alberga el logo y el formulario */
 .container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    align-items: center;  /* Centra verticalmente los elementos */
+    justify-content: center; /* Centra horizontalmente */
     flex: 1; /* Permite que el contenedor ocupe el espacio restante */
 }
 
 /* Logo */
+.logo-container {
+    flex: 0 1 40%; /* Hace que el logo ocupe un 40% del contenedor */
+    display: flex;
+    justify-content: flex-start; /* Alinea el logo a la izquierda */
+    padding-right: 20px; /* Añade espacio entre el logo y el formulario */
+}
+
 .logo-container img {
-    max-width: 100%;
+    max-width: 600px; /* Limita el tamaño del logo para que no ocupe demasiado */
     height: auto;
-    margin-bottom: 20px;
 }
 
-/* Texto de bienvenida */
-.welcome-text h1 {
-    color: #e94560; /* Rojo vibrante */
-    margin: 10px 0;
-}
-
-.welcome-text p {
-    margin: 10px 0;
-}
-
-/* Estilos para el formulario de inicio de sesión */
+/* Formulario de inicio de sesión */
 .login-container {
+    flex: 0 1 60%; /* El formulario ocupa el 60% del contenedor */
     background-color: #16213e; /* Fondo oscuro para el formulario */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     width: 100%;
-    max-width: 400px; /* Limita el tamaño del formulario */
-    margin-top: 20px;
+    max-width: 400px; /* Limita el tamaño máximo del formulario */
 }
 
+/* Título del formulario */
 .login-container h2 {
-    color: #e94560; /* Título con rojo vibrante */
+    color: #e94560; /* Rojo vibrante */
     margin-bottom: 20px;
 }
 
@@ -83,7 +78,18 @@ body {
     background-color: #f05969; /* Hover más claro */
 }
 
-/* Estilos del footer */
+/* Estilos para enlaces (si es necesario) */
+.login-container a {
+    color: #e94560; /* Rojo vibrante para enlaces */
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
 footer {
     background-color: #16213e;
     padding: 10px 0;
@@ -95,11 +101,4 @@ footer {
 
 .footer-content p {
     margin: 0;
-}
-
-/* Asegura que el footer esté al fondo */
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
