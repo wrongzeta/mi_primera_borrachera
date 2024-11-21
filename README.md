@@ -32,7 +32,7 @@ Importa los archivos SQL (si los tienes) desde el panel de phpMyAdmin para crear
 ### 4. Configuración del Archivo de Base de Datos
 Si utilizas un archivo de configuración para la base de datos (config.php o similar), asegúrate de configurar los siguientes datos:
 
-php
+# php
     $host = 'localhost'; // Dirección del servidor de base de datos
     $dbname = 'mi_primera_borrachera'; // Nombre de la base de datos
     $username = 'root'; // Usuario por defecto de MySQL en XAMPP
@@ -40,6 +40,7 @@ php
 
 ### 5. Acceso al Sistema
 Una vez configurado todo lo anterior, abre tu navegador y ve a la siguiente URL:
+#
     http://localhost/mi_primera_borrachera/
 Ahí podrás acceder al sistema.
 
