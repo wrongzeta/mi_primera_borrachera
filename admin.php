@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-// Verificar si el usuario ha iniciado sesión y tiene el rol de administrador (rol ID = 3)
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) {
-    header("Location: login.php");
-    exit();
+// Verifica si el usuario ha iniciado sesión y tiene el rol de administrador
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'administrador') {
+    header('Location: login.php'); // Redirige al login si no está autenticado
+    exit;
 }
 ?>
 
@@ -13,44 +13,59 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interfaz del Administrador</title>
-    <link rel="stylesheet" href="styles_administrador.css">
+    <title>Administrador - Mi Primera Borrachera</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles_admin.css">
 </head>
 <body>
-    <h1>Bienvenido, Administrador <?php echo $_SESSION['usuario']; ?></h1>
-    <p>Aquí puedes gestionar todos los aspectos del bar.</p>
+    <div class="admin-container">
+        <!-- Menú lateral -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Logo" class="logo-img">
+                <h2>Mi Primera Borrachera</h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="pedidos.php" data-section="Pedidos" class="menu-link"><i class="fas fa-tasks"></i> Gestión de Pedidos</a></li>
+                    <li><a href="inventario.php" data-section="Inventario" class="menu-link"><i class="fas fa-boxes"></i> Gestión de Inventario</a></li>
+                    <li><a href="reportes.php" data-section="Reportes" class="menu-link"><i class="fas fa-chart-line"></i> Reportes</a></li>
+                    <li><a href="configuracion.php" data-section="Configuracion" class="menu-link"><i class="fas fa-cogs"></i> Configuración</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-    <h2>Gestión de Inventario</h2>
-    <form action="actualizar_inventario.php" method="POST">
-        <label for="producto_id">ID del Producto:</label>
-        <input type="number" id="producto_id" name="producto_id" required>
+        <!-- Sección dinámica -->
+        <main class="main-content">
+            <div id="content">
+                <h1>Bienvenido, Administrador</h1>
+                <p>Selecciona una opción del menú para comenzar.</p>
+            </div>
+        </main>
+    </div>
 
-        <label for="cantidad">Cantidad a actualizar:</label>
-        <input type="number" id="cantidad" name="cantidad" required>
+    <script>
+        const links = document.querySelectorAll('.menu-link');
+        const content = document.getElementById('content');
 
-        <input type="submit" value="Actualizar Inventario">
-    </form>
+        links.forEach(link => {
+            link.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const section = e.target.href;
 
-    <h2>Ver Reportes</h2>
-    <form action="ver_reportes.php" method="GET">
-        <label for="sede">Sede:</label>
-        <select id="sede" name="sede">
-            <option value="Restrepo">Restrepo</option>
-            <option value="Primera de Mayo">Primera de Mayo</option>
-            <option value="Galerías">Galerías</option>
-            <option value="Chía">Chía</option>
-        </select>
-
-        <label for="fecha_inicio">Desde:</label>
-        <input type="date" id="fecha_inicio" name="fecha_inicio" required>
-
-        <label for="fecha_fin">Hasta:</label>
-        <input type="date" id="fecha_fin" name="fecha_fin" required>
-
-        <input type="submit" value="Ver Reporte">
-    </form>
-
-    <!-- Botón de cerrar sesión -->
-    <a href="logout.php" class="logout-button">Cerrar Sesión</a>
+                try {
+                    const response = await fetch(section);
+                    if (response.ok) {
+                        const html = await response.text();
+                        content.innerHTML = html;
+                    } else {
+                        content.innerHTML = `<p>Error al cargar la sección.</p>`;
+                    }
+                } catch (error) {
+                    content.innerHTML = `<p>Error al conectar con el servidor.</p>`;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

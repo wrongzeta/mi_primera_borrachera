@@ -1,0 +1,96 @@
+/* Estilos generales */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #f5f5f5;
+    background-color: #1a1a2e; /* Fondo oscuro */
+    display: flex;
+    height: 100vh;
+}
+
+/* Contenedor principal */
+.admin-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Menú lateral */
+.sidebar {
+    background-color: #16213e;
+    padding: 20px;
+    width: 250px;
+    height: 100%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar .logo-img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 10px;
+    border-radius: 50%;
+    border: 2px solid #e94560;
+}
+
+.sidebar h2 {
+    color: #e94560; /* Rojo vibrante */
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+/* Lista de navegación */
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.sidebar nav ul li {
+    margin: 15px 0;
+}
+
+.sidebar nav ul li a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar nav ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Hover del menú */
+.sidebar nav ul li a:hover {
+    background-color: #e94560;
+    color: #fff;
+}
+
+/* Sección dinámica */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.main-content h1 {
+    color: #e94560;
+    margin-bottom: 10px;
+}
+
+.main-content p {
+    line-height: 1.5;
+    font-size: 16px;
+}
