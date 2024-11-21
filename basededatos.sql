@@ -100,8 +100,8 @@ INSERT INTO usuarios (username, password, rol_id, sede_id) VALUES
 ('admin', '$2y$10$mvKM8u6CpdPyYujOrYOm6.kdibfG700P7l5jBIKxhT/wta1ANtFm.', 3, 1), -- Contraseña: admin2024
 ('David', '$2y$10$g5PVsK55BXOvk1QfiY8nNe3BxoEcJXb6TutaOEopEdbbUaJVbzX.W', 1, 1), -- Contraseña: Juanda2020
 ('JuanDavid', '$2y$10$bxabe.hMXbfnMStpY7Rz9.xXQV8/4HFKoeRstpzcWv0sKfYocIA.m', 2, 1), -- Contraseña: DavidContra123
-('Carlos', '$2y$10$0R.8Jf/8nHrAzeqWUEvtoehy8HGG47cjCyvLMBm/nK97vsQGOMkUO', 1, 2), -- Contraseña: Mesero2024
-('Sofia', '$2y$10$WoBjDNcEiqcruEYsTfUfb.qgTtAtB8v/uExGwZLu.arvR2vJDJZzO', 1, 3); -- Contraseña: Sofia2024
+('Carlos', '$2y$10$0R.8Jf/8nHrAzeqWUEvtoehy8HGG47cjCyvLMBm/nK97vsQGOMkUO', 1, 2), -- Contraseña: CarlosMesero2014
+('Sofia', '$2y$10$WoBjDNcEiqcruEYsTfUfb.qgTtAtB8v/uExGwZLu.arvR2vJDJZzO', 1, 3); -- Contraseña: Sofiase2024
 
 -- Insertar productos
 INSERT INTO productos (id, nombre, precio, imagen, costo_venta, precio_venta) VALUES

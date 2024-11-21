@@ -39,12 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Redirige a la página correspondiente según el rol
             if ($_SESSION['rol'] === 1) { // Asumiendo que 1 es el ID del rol de mesero
                 header("Location: mesas.php");
+                exit(); // Importante el exit() después de header()
             } elseif ($_SESSION['rol'] === 2) { // Asumiendo que 2 es el ID del rol de cajero
-                header("Location: cajero.php"); // Cambia a la ruta de tu página del cajero
+                header("Location: cajero.php");
+                exit(); // También es importante aquí el exit()
             } else {
-                header("Location: admin.php"); // Cambia a la ruta de tu página de administrador
+                header("Location: admin.php");
+                exit();
             }
-            exit();
         } else {
             // Redirige a index.html con un parámetro de error
             header("Location: index.html?error=1");
@@ -85,6 +87,12 @@ $conn->close();
 
                 <input type="submit" value="Iniciar sesión">
             </form>
+            <?php
+                // Mostrar error si la contraseña es incorrecta
+                if (isset($_GET['error']) && $_GET['error'] == 1) {
+                    echo '<p style="color: red;">Nombre de usuario o contraseña incorrectos.</p>';
+                }
+            ?>
         </div>
     </div>
 </body>

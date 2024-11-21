@@ -37,49 +37,23 @@ body {
     margin: 10px 0;
 }
 
-/* Estilos para el formulario de inicio de sesión */
-.login-container {
-    background-color: #16213e; /* Fondo oscuro para el formulario */
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    width: 100%;
-    max-width: 400px; /* Limita el tamaño del formulario */
+/* Botón de inicio de sesión */
+.login-btn-container {
     margin-top: 20px;
 }
 
-.login-container h2 {
-    color: #e94560; /* Título con rojo vibrante */
-    margin-bottom: 20px;
-}
-
-/* Estilos para los campos de entrada */
-.login-container input[type="text"],
-.login-container input[type="password"] {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #1a1a2e; /* Fondo oscuro para campos */
-    color: #f5f5f5; /* Texto blanco */
-    font-size: 16px;
-}
-
-/* Estilo del botón de enviar */
-.login-container input[type="submit"] {
+.login-btn {
+    display: inline-block;
     padding: 15px 30px;
     background-color: #e94560; /* Rojo vibrante */
     color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    text-decoration: none;
     font-size: 18px;
-    width: 100%;
+    border-radius: 5px;
     transition: background-color 0.3s;
 }
 
-.login-container input[type="submit"]:hover {
+.login-btn:hover {
     background-color: #f05969; /* Hover más claro */
 }
 
@@ -90,7 +64,6 @@ footer {
     text-align: center;
     color: #f5f5f5;
     width: 100%;
-    margin-top: auto; /* Esto asegura que el footer se empuje hacia abajo */
 }
 
 .footer-content p {
@@ -102,4 +75,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+}
+
+footer {
+    margin-top: auto; /* Esto asegura que el footer se empuje hacia abajo */
 }
