@@ -84,16 +84,16 @@ INSERT INTO roles (nombre) VALUES ('mesero'), ('cajero'), ('admin');
 -- Insertar sedes
 INSERT INTO sedes (nombre) VALUES ('Restrepo'), ('Primera de Mayo'), ('Galerías'), ('Chía');
 
--- Insertar mesas
-INSERT INTO mesas (numero, estado, sede_id) VALUES 
-(1, 'libre', 1),
-(2, 'libre', 1),
-(3, 'libre', 2),
-(4, 'libre', 2),
-(5, 'libre', 3),
-(6, 'libre', 3),
-(7, 'libre', 4),
-(8, 'libre', 4);
+-- Insertar mesas con nombre
+INSERT INTO mesas (numero, estado, sede_id, nombre) VALUES 
+(1, 'libre', 1, 'Mesa 1'),
+(2, 'libre', 1, 'Mesa 2'),
+(3, 'libre', 2, 'Mesa 3'),
+(4, 'libre', 2, 'Mesa 4'),
+(5, 'libre', 3, 'Mesa 5'),
+(6, 'libre', 3, 'Mesa 6'),
+(7, 'libre', 4, 'Mesa 7'),
+(8, 'libre', 4, 'Mesa 8');
 
 -- Insertar usuarios con contraseñas hasheadas
 INSERT INTO usuarios (username, password, rol_id, sede_id) VALUES

@@ -6,8 +6,15 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) { // Asumiendo que 3
     header('Location: login.php'); // Redirige al login si no está autenticado
     exit;
 }
-?>
 
+// Cerrar sesión
+if (isset($_GET['logout'])) {
+    session_unset();
+    session_destroy();
+    header('Location: login.php'); // Redirige al login después de cerrar sesión
+    exit;
+}
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -32,6 +39,8 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) { // Asumiendo que 3
                     <li><a href="inventario.php" data-section="Inventario" class="menu-link"><i class="fas fa-boxes"></i> Gestión de Inventario</a></li>
                     <li><a href="reportes.php" data-section="Reportes" class="menu-link"><i class="fas fa-chart-line"></i> Reportes</a></li>
                     <li><a href="configuracion.php" data-section="Configuracion" class="menu-link"><i class="fas fa-cogs"></i> Configuración</a></li>
+                    <!-- Botón de Cerrar sesión en el menú lateral -->
+                    <li><a href="?logout=true" class="btn-logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 </ul>
             </nav>
         </aside>

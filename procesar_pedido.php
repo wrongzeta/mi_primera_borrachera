@@ -2,9 +2,12 @@
 session_start();
 
 // Verificar si el usuario ha iniciado sesión y tiene el rol de mesero
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 1) {
-    header("Location: login.php");
-    exit();
+if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 1) { // Verifica si es mesero
+    // Si no está logueado, asignamos un valor predeterminado para usuario_id
+    $usuario_id = null; // O puedes asignar un valor genérico si lo prefieres
+} else {
+    // Si está logueado, obtenemos el ID del usuario desde la sesión
+    $usuario_id = $_SESSION['usuario_id'];
 }
 
 // Conectar a la base de datos
@@ -33,9 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['mesa'])) {
     $mesa = $query->fetch(PDO::FETCH_ASSOC);
 
     if ($mesa) {
-        // Iniciar un nuevo pedido
-        $usuario_id = $_SESSION['usuario_id']; // Asegúrate de que tienes el ID del usuario en la sesión
-        $sede_id = $_SESSION['sede_id']; // Suponiendo que el ID de la sede está en la sesión
+        // Si no hay usuario logueado, podemos asignar un usuario genérico o nulo
+        $sede_id = $_SESSION['sede_id'] ?? 1; // Usar sede_id de la sesión o un valor predeterminado
+
+        // Iniciar un nuevo pedido (sin usuario_id si no hay sesión)
         $query_pedido = $pdo->prepare("INSERT INTO pedidos (usuario_id, mesa_id) VALUES (:usuario_id, :mesa_id)");
         $query_pedido->execute(['usuario_id' => $usuario_id, 'mesa_id' => $mesa['id']]);
         $pedido_id = $pdo->lastInsertId(); // Obtener el ID del nuevo pedido

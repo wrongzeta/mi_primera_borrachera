@@ -2,86 +2,59 @@
 session_start();
 
 // Verifica si el usuario ha iniciado sesión y tiene el rol de administrador
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'administrador') {
-    header('Location: login.php'); // Redirige al login si no está autenticado
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) {
+    header('Location: login.php');
     exit;
 }
 
-// Conexión a la base de datos
-$servidor = "localhost"; 
-$usuario = "root"; 
-$contraseña = ""; 
-$base_datos = "mi_primera_borrachera";
+if (isset($_POST['cambiar_estado']) && $_POST['cambiar_estado'] == 'cerrado' && isset($_POST['pedido_id'])) {
+    // Conexión a la base de datos
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "mi_primera_borrachera";
 
-$conn = new mysqli($servidor, $usuario, $contraseña, $base_datos);
+    $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Verifica la conexión
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
-}
-
-// Cambiar el estado del pedido
-if (isset($_GET['cambiar_estado']) && isset($_GET['id'])) {
-    $pedido_id = $_GET['id'];
-    $nuevo_estado = $_GET['estado'] == 'pendiente' ? 'cerrado' : 'pendiente';
-
-    $sql = "UPDATE pedidos SET estado = ? WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $nuevo_estado, $pedido_id);
-    
-    if ($stmt->execute()) {
-        echo "Estado actualizado correctamente.";
-    } else {
-        echo "Error al actualizar el estado.";
+    if ($conn->connect_error) {
+        die("Conexión fallida: " . $conn->connect_error);
     }
 
-    // Redirige después de cambiar el estado
-    header("Location: gestion_pedidos.php");
-    exit();
+    $pedido_id = $_POST['pedido_id'];
+
+    // Verificar si el pedido ya está cerrado
+    $sql_check = "SELECT estado FROM pedidos WHERE id = ?";
+    if ($stmt = $conn->prepare($sql_check)) {
+        $stmt->bind_param('i', $pedido_id);
+        $stmt->execute();
+        $stmt->store_result();
+        $stmt->bind_result($estado);
+        $stmt->fetch();
+        if ($estado == 'cerrado') {
+            echo "El pedido ya está cerrado.";
+            $conn->close();
+            exit;
+        }
+    }
+
+    // Actualizar el estado del pedido a "cerrado"
+    $sql = "UPDATE pedidos SET estado = 'cerrado' WHERE id = ?";
+    if ($stmt = $conn->prepare($sql)) {
+        $stmt->bind_param('i', $pedido_id);
+        if ($stmt->execute()) {
+            echo "Pedido cerrado correctamente.";
+        } else {
+            echo "Error al cerrar el pedido.";
+        }
+        $stmt->close();
+    } else {
+        echo "Error al preparar la consulta.";
+    }
+
+    $conn->close();
+
+    // Redirigir de vuelta a la página de gestión de pedidos
+    header('Location: pedidos.php');
+    exit;
 }
-
-// Consulta para obtener los pedidos
-$sql = "SELECT * FROM pedidos";
-$resultado = $conn->query($sql);
-?>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Pedidos - Mi Primera Borrachera</title>
-    <link rel="stylesheet" href="styles_admin.css">
-</head>
-<body>
-    <h1>Gestión de Pedidos</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Usuario</th>
-            <th>Sede</th>
-            <th>Fecha</th>
-            <th>Estado</th>
-            <th>Acción</th>
-        </tr>
-        <?php while ($pedido = $resultado->fetch_assoc()): ?>
-        <tr>
-            <td><?php echo $pedido['id']; ?></td>
-            <td><?php echo $pedido['usuario_id']; ?></td>
-            <td><?php echo $pedido['sede_id']; ?></td>
-            <td><?php echo $pedido['fecha']; ?></td>
-            <td><?php echo $pedido['estado']; ?></td>
-            <td>
-                <a href="gestion_pedidos.php?cambiar_estado=true&id=<?php echo $pedido['id']; ?>&estado=<?php echo $pedido['estado']; ?>">
-                    Cambiar Estado
-                </a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
-    </table>
-</body>
-</html>
-
-<?php
-$conn->close();
 ?>

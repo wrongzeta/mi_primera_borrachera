@@ -94,3 +94,18 @@ body {
     line-height: 1.5;
     font-size: 16px;
 }
+
+.btn-logout {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #FF4C61; /* Color de fondo similar al vibrante */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btn-logout:hover {
+    background-color: #FF6A80; /* Hover más claro */
+}
