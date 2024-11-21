@@ -68,7 +68,7 @@ $conn->close();
                         <td><?php echo ucfirst($pedido['estado']); ?></td>
                         <td><?php echo $pedido['sede']; ?></td>
                         <td>
-                            <button class="edit" onclick="location.href='editar_pedido.php?id=<?php echo $pedido['id']; ?>'">Editar</button>
+                            <button class="edit" onclick="location.href='gestion_pedidos.php?id=<?php echo $pedido['id']; ?>'">Editar</button>
                             <button class="close" onclick="location.href='cerrar_pedido.php?id=<?php echo $pedido['id']; ?>'">Cerrar</button>
                         </td>
                     </tr>
