@@ -41,9 +41,19 @@ CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
-    cantidad INT NOT NULL,
     imagen VARCHAR(255) -- Campo para la ruta de la imagen
 );
+
+CREATE TABLE inventarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    producto_id INT NOT NULL,
+    sede_id INT NOT NULL,
+    cantidad INT NOT NULL,
+    FOREIGN KEY (producto_id) REFERENCES productos(id),
+    FOREIGN KEY (sede_id) REFERENCES sedes(id),
+    UNIQUE (producto_id, sede_id) -- Asegura que cada producto esté registrado una sola vez por sede
+);
+
 
 -- Tabla de pedidos
 CREATE TABLE pedidos (
