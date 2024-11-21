@@ -1,0 +1,62 @@
+/* Reseteo básico de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Aseguramos que todo el contenido ocupe todo el alto y el ancho */
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    font-family: Arial, sans-serif; /* Fuente básica */
+    background-color: #1a1a2e; /* Color de fondo oscuro */
+    color: #FFF; /* Color de texto blanco */
+}
+
+/* Contenedor principal del formulario */
+.container {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo ligeramente oscuro */
+    padding: 30px;
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px; /* Ancho máximo para no hacer el formulario demasiado grande */
+    text-align: center;
+}
+
+/* Título */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #FF4C61; /* Color vibrante para el título */
+}
+
+/* Estilos de los campos del formulario */
+input[type="date"], select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #2e61c0; /* Azul para los campos */
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+
+/* Botones */
+button, input[type="submit"] {
+    background-color: #2e68c0; /* Azul para los botones */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #8c1c1c; /* Color azul más oscuro al pasar el mouse */
+}
