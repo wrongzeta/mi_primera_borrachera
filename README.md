@@ -46,8 +46,8 @@ Una vez configurado todo lo anterior, abre tu navegador y ve a la siguiente URL:
     http://localhost/mi_primera_borrachera/
 Ahí podrás acceder al sistema.
 
-Uso del Sistema
- El sistema permite gestionar el funcionamiento de un bar nocturno con tres roles principales:
+### Uso del Sistema
+El sistema permite gestionar el funcionamiento de un bar nocturno con tres roles principales:
 
 Mesero: Puede tomar pedidos, asignar mesas y ver el inventario.
 Cajero: Puede cerrar pedidos, gestionar inventario y generar reportes.
