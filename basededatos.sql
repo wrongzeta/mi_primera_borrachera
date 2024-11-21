@@ -41,9 +41,12 @@ CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
-    imagen VARCHAR(255) -- Campo para la ruta de la imagen
+    imagen VARCHAR(255),
+    costo_venta DECIMAL(10, 2) NOT NULL, -- Agregar este campo
+    precio_venta DECIMAL(10, 2) NOT NULL -- Agregar este campo
 );
 
+-- Tabla de inventarios
 CREATE TABLE inventarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     producto_id INT NOT NULL,
@@ -51,9 +54,8 @@ CREATE TABLE inventarios (
     cantidad INT NOT NULL,
     FOREIGN KEY (producto_id) REFERENCES productos(id),
     FOREIGN KEY (sede_id) REFERENCES sedes(id),
-    UNIQUE (producto_id, sede_id) -- Asegura que cada producto esté registrado una sola vez por sede
+    UNIQUE (producto_id, sede_id)
 );
-
 
 -- Tabla de pedidos
 CREATE TABLE pedidos (
@@ -82,8 +84,6 @@ INSERT INTO roles (nombre) VALUES ('mesero'), ('cajero'), ('admin');
 -- Insertar sedes
 INSERT INTO sedes (nombre) VALUES ('Restrepo'), ('Primera de Mayo'), ('Galerías'), ('Chía');
 
---Primera ejecucion SQL hasta aca
-
 -- Insertar mesas
 INSERT INTO mesas (numero, estado, sede_id) VALUES 
 (1, 'libre', 1),
@@ -96,14 +96,14 @@ INSERT INTO mesas (numero, estado, sede_id) VALUES
 (8, 'libre', 4);
 
 -- Insertar usuarios con contraseñas hasheadas
-INSERT INTO `usuarios` (`username`, `password`, `rol_id`, `sede_id`) VALUES
+INSERT INTO usuarios (username, password, rol_id, sede_id) VALUES
 ('admin', '$2y$10$mvKM8u6CpdPyYujOrYOm6.kdibfG700P7l5jBIKxhT/wta1ANtFm.', 3, 1), -- Contraseña: admin2024
 ('David', '$2y$10$g5PVsK55BXOvk1QfiY8nNe3BxoEcJXb6TutaOEopEdbbUaJVbzX.W', 1, 1), -- Contraseña: Juanda2020
 ('JuanDavid', '$2y$10$bxabe.hMXbfnMStpY7Rz9.xXQV8/4HFKoeRstpzcWv0sKfYocIA.m', 2, 1), -- Contraseña: DavidContra123
 ('Carlos', '$2y$10$0R.8Jf/8nHrAzeqWUEvtoehy8HGG47cjCyvLMBm/nK97vsQGOMkUO', 1, 2), -- Contraseña: Mesero2024
 ('Sofia', '$2y$10$WoBjDNcEiqcruEYsTfUfb.qgTtAtB8v/uExGwZLu.arvR2vJDJZzO', 1, 3); -- Contraseña: Sofia2024
 
-
+-- Insertar productos
 INSERT INTO productos (id, nombre, precio, imagen, costo_venta, precio_venta) VALUES
 (25, 'Aguardiente Antioqueño', 50000.00, 'imagenes/aguardiente_antioqueñoazul.jpg', 30000.00, 50000.00),
 (26, 'Ron Medellín', 60000.00, 'imagenes/ron_medellin.jpg', 40000.00, 60000.00),
@@ -118,7 +118,7 @@ INSERT INTO productos (id, nombre, precio, imagen, costo_venta, precio_venta) VA
 (35, 'Cerveza Poker', 6500.00, 'imagenes/poker.jpg', 3200.00, 6500.00),
 (36, 'Cerveza Corona', 10000.00, 'imagenes/corona.jpg', 5000.00, 10000.00);
 
-
+-- Insertar inventarios
 INSERT INTO inventarios (producto_id, sede_id, cantidad) VALUES
 (25, 1, 50), (25, 2, 40), (25, 3, 60), (25, 4, 30),
 (26, 1, 70), (26, 2, 50), (26, 3, 80), (26, 4, 60),
