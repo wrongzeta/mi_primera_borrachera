@@ -28,16 +28,22 @@ try {
 // Obtener el mesa_id desde la URL
 $mesa_id = $_GET['mesa_id'];
 
-// Obtener los pedidos de la mesa seleccionada
+// Obtener los pedidos de la mesa seleccionada, incluyendo el nombre del producto, precio y cantidad
 $query = $pdo->prepare("
-    SELECT p.id, p.fecha, dp.producto, dp.cantidad, dp.precio
+    SELECT p.id, p.fecha, pr.nombre AS producto, dp.cantidad, pr.precio, (dp.cantidad * pr.precio) AS total_producto
     FROM pedidos p
     JOIN detalles_pedido dp ON p.id = dp.pedido_id
+    JOIN productos pr ON dp.producto_id = pr.id
     WHERE p.mesa_id = :mesa_id AND p.estado = 'pendiente'
 ");
 $query->execute(['mesa_id' => $mesa_id]);
 $pedidos = $query->fetchAll(PDO::FETCH_ASSOC);
 
+// Calcular el total del pedido
+$total_pedido = 0;
+foreach ($pedidos as $pedido) {
+    $total_pedido += $pedido['total_producto'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,13 +66,16 @@ $pedidos = $query->fetchAll(PDO::FETCH_ASSOC);
         <?php
         if ($pedidos) {
             foreach ($pedidos as $pedido) {
-                echo "<li>Producto: " . htmlspecialchars($pedido['producto']) . " - Cantidad: " . htmlspecialchars($pedido['cantidad']) . " - Precio: " . htmlspecialchars($pedido['precio']) . "</li>";
+                echo "<li>Producto: " . htmlspecialchars($pedido['producto']) . " - Cantidad: " . htmlspecialchars($pedido['cantidad']) . " - Precio: " . htmlspecialchars($pedido['precio']) . " - Total: " . htmlspecialchars($pedido['total_producto']) . "</li>";
             }
         } else {
             echo "<li>No hay pedidos pendientes para esta mesa.</li>";
         }
         ?>
     </ul>
+
+    <!-- Mostrar el total del pedido -->
+    <h3>Total del Pedido: <?php echo htmlspecialchars($total_pedido); ?> </h3>
 
     <!-- Botón para cerrar el pedido -->
     <form action="cerrar_pedido_action.php" method="POST">
