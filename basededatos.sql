@@ -104,19 +104,20 @@ INSERT INTO `usuarios` (`username`, `password`, `rol_id`, `sede_id`) VALUES
 ('Sofia', '$2y$10$WoBjDNcEiqcruEYsTfUfb.qgTtAtB8v/uExGwZLu.arvR2vJDJZzO', 1, 3); -- Contraseña: Sofia2024
 
 
-INSERT INTO `productos` (`id`, `nombre`, `precio`, `imagen`) VALUES
-(25, 'Aguardiente Antioqueño', 50000.00, 'imagenes/aguardiente_antioqueñoazul.jpg'),
-(26, 'Ron Medellín', 60000.00, 'imagenes/ron_medellin.jpg'),
-(27, 'Cerveza Club Colombia', 8000.00, 'imagenes/club_colombia.jpg'),
-(28, 'Whisky Johnnie Walker Black Label', 120000.00, 'imagenes/johnnie_walker.jpg'),
-(29, 'Tequila José Cuervo', 90000.00, 'imagenes/jose_cuervo.jpg'),
-(30, 'Vodka Absolut', 70000.00, 'imagenes/absolut.jpg'),
-(31, 'Cigarros Marlboro', 12000.00, 'imagenes/marlboro.jpg'),
-(32, 'Cigarros Lucky', 11000.00, 0, 'imagenes/lucky.jpg'),
-(33, 'Paquete de Tabaco Pielroja', 6000.00, 'imagenes/pielroja.jpg'),
-(34, 'Cerveza Águila', 7000.00, 'imagenes/aguila.jpg'),
-(35, 'Cerveza Poker', 6500.00, 'imagenes/poker.jpg'),
-(36, 'Cerveza Corona', 10000.00, 'imagenes/corona.jpg');
+INSERT INTO productos (id, nombre, precio, imagen, costo_venta, precio_venta) VALUES
+(25, 'Aguardiente Antioqueño', 50000.00, 'imagenes/aguardiente_antioqueñoazul.jpg', 30000.00, 50000.00),
+(26, 'Ron Medellín', 60000.00, 'imagenes/ron_medellin.jpg', 40000.00, 60000.00),
+(27, 'Cerveza Club Colombia', 8000.00, 'imagenes/club_colombia.jpg', 4000.00, 8000.00),
+(28, 'Whisky Johnnie Walker Black Label', 120000.00, 'imagenes/johnnie_walker.jpg', 80000.00, 120000.00),
+(29, 'Tequila José Cuervo', 90000.00, 'imagenes/jose_cuervo.jpg', 60000.00, 90000.00),
+(30, 'Vodka Absolut', 70000.00, 'imagenes/absolut.jpg', 40000.00, 70000.00),
+(31, 'Cigarros Marlboro', 12000.00, 'imagenes/marlboro.jpg', 7000.00, 12000.00),
+(32, 'Cigarros Lucky', 11000.00, 'imagenes/lucky.jpg', 6000.00, 11000.00),
+(33, 'Paquete de Tabaco Pielroja', 6000.00, 'imagenes/pielroja.jpg', 3000.00, 6000.00),
+(34, 'Cerveza Águila', 7000.00, 'imagenes/aguila.jpg', 3500.00, 7000.00),
+(35, 'Cerveza Poker', 6500.00, 'imagenes/poker.jpg', 3200.00, 6500.00),
+(36, 'Cerveza Corona', 10000.00, 'imagenes/corona.jpg', 5000.00, 10000.00);
+
 
 INSERT INTO inventarios (producto_id, sede_id, cantidad) VALUES
 (25, 1, 50), (25, 2, 40), (25, 3, 60), (25, 4, 30),

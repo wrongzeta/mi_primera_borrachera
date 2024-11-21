@@ -53,6 +53,11 @@ foreach ($pedidos as $pedido) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles_cajero.css">
     <title>Pedidos de la Mesa</title>
+    <script>
+        function volver() {
+            window.history.back(); // Vuelve a la página anterior
+        }
+    </script>
 </head>
 <body>
 
@@ -82,6 +87,10 @@ foreach ($pedidos as $pedido) {
         <input type="hidden" name="mesa_id" value="<?php echo htmlspecialchars($mesa_id); ?>">
         <input type="submit" value="Cerrar Pedido">
     </form>
+
+    <br>
+    <!-- Botón para volver -->
+    <button class="logout-button" onclick="volver()">Volver</button>
 
 </body>
 </html>
