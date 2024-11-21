@@ -1,0 +1,96 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1A35;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #FF4C61; /* Color vibrante para los encabezados */
+}
+
+/* Estilo para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #1E2A47; /* Fondo oscuro para la tabla */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #333; /* Borde oscuro para la tabla */
+}
+
+th {
+    background-color: #2E8BC0; /* Color de fondo para los encabezados de la tabla */
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+td {
+    background-color: #2A3D5F; /* Color de fondo para las celdas */
+    color: #FFFFFF;
+}
+
+tr:nth-child(even) td {
+    background-color: #1F2B44; /* Alternar color para las filas pares */
+}
+
+tr:hover {
+    background-color: #FF6A80; /* Color al pasar el ratón sobre una fila */
+    cursor: pointer;
+}
+
+/* Estilo para los botones */
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease;
+}
+
+button.edit {
+    background-color: #2E8BC0; /* Botón de editar con color azul */
+}
+
+button.edit:hover {
+    background-color: #1D6A92;
+}
+
+button.close {
+    background-color: #FF4C61; /* Botón de cerrar con color rojo */
+}
+
+button.close:hover {
+    background-color: #FF6A80;
+}
+
+/* Estilo para los contenedores de botones */
+button-container {
+    text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+    th, td {
+        padding: 10px;
+    }
+}

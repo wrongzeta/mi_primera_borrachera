@@ -1,13 +1,6 @@
 <?php
-session_start();
+session_start();  // Asegúrate de que la sesión esté iniciada
 
-// Verifica si el usuario ha iniciado sesión y tiene el rol de administrador
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) { // Asumiendo que 3 es el rol de administrador
-    header('Location: login.php'); // Redirige al login si no está autenticado
-    exit;
-}
-
-// Conexión a la base de datos
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -20,55 +13,73 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Consulta para obtener los pedidos
-$query = "SELECT p.id, p.mesa_id, p.fecha, u.username 
-          FROM pedidos p 
-          JOIN usuarios u ON p.usuario_id = u.id";
-
-// Mostrar la consulta SQL para depurar
-echo "Consulta SQL: " . $query . "<br>";
+// Consulta para obtener los pedidos, incluyendo el nombre de la sede desde la tabla sedes
+$query = "SELECT p.id, p.mesa_id, p.fecha, p.estado, s.nombre AS sede 
+          FROM pedidos p
+          JOIN mesas m ON p.mesa_id = m.id
+          JOIN sedes s ON m.sede_id = s.id"; // Unimos con la tabla sedes usando sede_id de mesas
 
 $result = $conn->query($query);
 
-// Verifica si hubo un error en la consulta
-if ($result === false) {
-    echo "Error en la consulta: " . $conn->error;  // Si hay error en la consulta, lo muestra
-    exit;
-}
-
-// Mostrar el número de filas retornadas
-echo "Número de filas: " . $result->num_rows . "<br>";
-
+// Almacenar los resultados en un array para su posterior uso
+$pedidos = [];
 if ($result->num_rows > 0) {
-    // Muestra los pedidos
-    echo '<table>';
-    echo '<thead><tr><th>ID Pedido</th><th>Mesa</th><th>Fecha</th><th>Usuario</th><th>Acciones</th></tr></thead>';
-    echo '<tbody>';
-    
     while ($row = $result->fetch_assoc()) {
-        $id = $row['id'];
-        $mesa_id = $row['mesa_id'];
-        $fecha = $row['fecha'];
-        $usuario = $row['username'];
-
-        // Mostrar los detalles de cada pedido
-        echo "<tr>
-                <td>$id</td>
-                <td>$mesa_id</td>
-                <td>$fecha</td>
-                <td>$usuario</td>
-                <td>
-                    <a href='ver_pedido.php?id=$id'>Ver Pedido</a> | 
-                    <a href='cambiar_estado.php?id=$id'>Cambiar Estado</a>
-                </td>
-              </tr>";
+        $pedidos[] = $row;  // Guardamos los pedidos en un array
     }
-
-    echo '</tbody>';
-    echo '</table>';
 } else {
     echo "No se han encontrado pedidos.";
 }
 
 $conn->close();
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedidos</title>
+    <link rel="stylesheet" href="styles_pedidos.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Pedidos en Sede <?php echo isset($_SESSION['sede_nombre']) ? $_SESSION['sede_nombre'] : 'No definida'; ?></h1> <!-- Asegúrate de tener la sede definida en la sesión -->
+
+    <?php if (count($pedidos) > 0): ?>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Pedido</th>
+                    <th>Mesa</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Sede</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($pedidos as $pedido): ?>
+                    <tr>
+                        <td><?php echo $pedido['id']; ?></td>
+                        <td><?php echo $pedido['mesa_id']; ?></td>
+                        <td><?php echo $pedido['fecha']; ?></td>
+                        <td><?php echo ucfirst($pedido['estado']); ?></td>
+                        <td><?php echo $pedido['sede']; ?></td>
+                        <td>
+                            <button class="edit" onclick="location.href='editar_pedido.php?id=<?php echo $pedido['id']; ?>'">Editar</button>
+                            <button class="close" onclick="location.href='cerrar_pedido.php?id=<?php echo $pedido['id']; ?>'">Cerrar</button>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php else: ?>
+        <p>No hay pedidos en esta sede.</p>
+    <?php endif; ?>
+
+</div>
+
+</body>
+</html>
