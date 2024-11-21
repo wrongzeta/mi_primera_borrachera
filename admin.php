@@ -2,11 +2,12 @@
 session_start();
 
 // Verifica si el usuario ha iniciado sesión y tiene el rol de administrador
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'administrador') {
+if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) { // Asumiendo que 3 es el rol de administrador
     header('Location: login.php'); // Redirige al login si no está autenticado
     exit;
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
