@@ -78,7 +78,7 @@ foreach ($pedidos as $pedido) {
     <h3>Total del Pedido: <?php echo htmlspecialchars($total_pedido); ?> </h3>
 
     <!-- Botón para cerrar el pedido -->
-    <form action="cerrar_pedido_action.php" method="POST">
+    <form action="procesar_cierre_pedido.php" method="POST">
         <input type="hidden" name="mesa_id" value="<?php echo htmlspecialchars($mesa_id); ?>">
         <input type="submit" value="Cerrar Pedido">
     </form>
