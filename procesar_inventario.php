@@ -1,6 +1,6 @@
 <?php
-// Incluir archivo de conexión a la base de datos
-include('conexion.php');
+// Incluir el archivo de conexión
+include('conect.php');
 
 // Procesar la actualización del inventario
 if (isset($_POST['update_inventory'])) {

@@ -47,5 +47,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $stmt->close();
     $conexion->close();
+
+    // Redirigir a admin.php
+    header("Location: admin.php");
+    exit;
 }
 ?>

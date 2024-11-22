@@ -8,7 +8,20 @@ $query = "SELECT u.id, u.username, r.nombre AS rol, s.nombre AS sede
           JOIN roles r ON u.rol_id = r.id
           JOIN sedes s ON u.sede_id = s.id";
 $result = $conexion->query($query);
+
+// Consulta para obtener mesas y sus sedes
+$query_mesas = "SELECT m.id, m.numero, m.estado, s.nombre AS sede
+                FROM mesas m
+                JOIN sedes s ON m.sede_id = s.id";
+$result_mesas = $conexion->query($query_mesas);
+
+// Verifica si la consulta tiene resultados
+if (!$result_mesas) {
+    die("Error en la consulta de mesas: " . $conexion->error);
+}
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -95,5 +108,68 @@ $result = $conexion->query($query);
             </table>
         </form>
     </div>
+
+    <div class="table-container">
+    <h2>Gestión de Mesas</h2>
+    <form method="POST" action="editar_mesas.php">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número</th>
+                    <th>Estado</th>
+                    <th>Sede</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = $result_mesas->fetch_assoc()): ?>
+                <tr>
+                    <td><?php echo $row['id']; ?></td>
+                    <td>
+                        <input type="number" name="numero[<?php echo $row['id']; ?>]" value="<?php echo $row['numero']; ?>" required>
+                    </td>
+                    <td>
+                        <select name="estado[<?php echo $row['id']; ?>]">
+                            <option value="libre" <?php echo $row['estado'] === 'libre' ? 'selected' : ''; ?>>Libre</option>
+                            <option value="ocupada" <?php echo $row['estado'] === 'ocupada' ? 'selected' : ''; ?>>Ocupada</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select name="sede[<?php echo $row['id']; ?>]">
+                            <option value="1" <?php echo $row['sede'] === 'Restrepo' ? 'selected' : ''; ?>>Restrepo</option>
+                            <option value="2" <?php echo $row['sede'] === 'Primera de Mayo' ? 'selected' : ''; ?>>Primera de Mayo</option>
+                            <option value="3" <?php echo $row['sede'] === 'Galerías' ? 'selected' : ''; ?>>Galerías</option>
+                            <option value="4" <?php echo $row['sede'] === 'Chía' ? 'selected' : ''; ?>>Chía</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="submit" name="guardar[<?php echo $row['id']; ?>]">Guardar</button>
+                        <button type="submit" name="eliminar[<?php echo $row['id']; ?>]">Eliminar</button>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </form>
+    <!-- Formulario para añadir mesa -->
+    <h3>Añadir Nueva Mesa</h3>
+    <form method="POST" action="añadir_mesa.php">
+        <label for="numero">Número de Mesa:</label>
+        <input type="number" name="numero" id="numero" required>
+
+        <label for="sede">Sede:</label>
+        <select name="sede" id="sede">
+            <option value="1">Restrepo</option>
+            <option value="2">Primera de Mayo</option>
+            <option value="3">Galerías</option>
+            <option value="4">Chía</option>
+        </select>
+
+        <button type="submit">Añadir Mesa</button>
+    </form>
+</div>
+
+    
 </body>
 </html>
