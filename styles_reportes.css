@@ -1,0 +1,104 @@
+/* Estilo General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1A35; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.container {
+    width: 70%;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #1A2A4A; /* Fondo para la sección */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos */
+h1 {
+    text-align: center;
+    color: #FF4C61; /* Color vibrante */
+    font-size: 2em;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Etiquetas y entradas del formulario */
+label {
+    font-size: 1.1em;
+    color: #FFFFFF;
+}
+
+input[type="date"], select {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #2E8BC0; /* Bordes en azul */
+    border-radius: 5px;
+    background-color: #0B1A35;
+    color: #FFFFFF;
+}
+
+input[type="date"]:focus, select:focus {
+    border-color: #FF4C61; /* Resaltar bordes en rojo vibrante */
+    outline: none;
+}
+
+/* Botón de Submit */
+input[type="submit"], .button {
+    padding: 12px 20px;
+    background-color: #2E8BC0; /* Azul para botones */
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover, .button:hover {
+    background-color: #FF6A80; /* Cambio de color en hover */
+}
+
+/* Botón de volver */
+button.button {
+    padding: 12px 20px;
+    background-color: #FF4C61; /* Rojo vibrante para acción de retroceder */
+    border: none;
+    color: #FFFFFF;
+    font-size: 1.1em;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.button:hover {
+    background-color: #FF6A80; /* Cambio de color en hover */
+}
+
+/* Selectores de errores y mensajes */
+.alert {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: #4CAF50; /* Verde para éxito */
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.alert.error {
+    background-color: #f44336; /* Rojo para error */
+}
+
+.alert.info {
+    background-color: #2196F3; /* Azul para información */
+}
