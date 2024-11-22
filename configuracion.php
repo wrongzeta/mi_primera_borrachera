@@ -1,6 +1,7 @@
 <?php
 require 'conex.php'; // Conexión a la base de datos
 
+
 // Obtener usuarios existentes
 $query = "SELECT u.id, u.username, r.nombre AS rol, s.nombre AS sede 
           FROM usuarios u
