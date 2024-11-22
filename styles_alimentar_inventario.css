@@ -1,0 +1,88 @@
+/* Estilo general para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1A35; /* Fondo oscuro */
+    color: #FFFFFF; /* Texto blanco */
+    margin: 0;
+    padding: 0;
+}
+
+/* Título principal */
+h2 {
+    color: #FF4C61; /* Rojo vibrante */
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Estilo de la tabla de productos */
+table.table-productos {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background-color: #2E8BC0; /* Azul para la tabla */
+}
+
+/* Encabezados de la tabla */
+table.table-productos th {
+    background-color: #FF4C61; /* Rojo vibrante */
+    color: #FFFFFF; /* Texto blanco en los encabezados */
+    padding: 12px;
+    text-align: left;
+}
+
+/* Filas de la tabla */
+table.table-productos td {
+    background-color: #25294d; /* Fondo blanco para las filas */
+    color: #bfc7eb; /* Texto oscuro */
+    padding: 10px;
+    text-align: left;
+}
+
+/* Resaltar filas al pasar el cursor */
+table.table-productos tr:hover {
+    background-color: #FF6A80; /* Rojo claro al pasar el ratón */
+}
+
+/* Estilo para los botones de actualización */
+.btn-actualizar {
+    background-color: #2E8BC0; /* Azul */
+    color: #FFFFFF; /* Texto blanco */
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 4px;
+    margin-top: 5px;
+}
+
+/* Estilo para los inputs de cantidad */
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-right: 10px;
+    border: 1px solid #2E8BC0; /* Azul para el borde */
+    border-radius: 4px;
+    background-color: #F5F5F5;
+}
+
+input[type="number"]:focus {
+    border-color: #FF4C61; /* Rojo vibrante en foco */
+    background-color: #FFF;
+}
+
+/* Botones */
+button{
+    background-color: #2e68c0; /* Azul para los botones */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #8c1c1c; /* Color azul más oscuro al pasar el mouse */
+}
