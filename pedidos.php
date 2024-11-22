@@ -69,7 +69,7 @@ $conn->close();
                         <td><?php echo $pedido['sede']; ?></td>
                         <td>
                             <button class="edit" onclick="location.href='gestion_pedidos.php?id=<?php echo $pedido['id']; ?>'">Editar</button>
-                            <button class="close" onclick="location.href='cerrar_pedido.php?id=<?php echo $pedido['id']; ?>'">Cerrar</button>
+                            <button class="close" onclick="location.href='cambiar_estado.php?id=<?php echo $pedido['id']; ?>'">Cerrar</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
