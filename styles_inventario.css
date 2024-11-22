@@ -1,0 +1,216 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1A35;  /* Fondo oscuro */
+    color: #FFFFFF;  /* Texto en blanco */
+    margin: 0;
+    padding: 0;
+}
+
+/* Títulos de cada sede */
+h2 {
+    color: #FF4C61;  /* Rojo vibrante */
+    text-align: center;
+    padding-top: 20px;
+}
+
+/* Estilo para las tablas */
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #2E8BC0;  /* Azul para las tablas */
+    border-radius: 8px;
+}
+
+/* Encabezados de la tabla */
+th {
+    background-color: #FF4C61;  /* Rojo vibrante */
+    color: #FFFFFF;  /* Texto blanco en los encabezados */
+    padding: 12px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+/* Filas de la tabla */
+td {
+    background-color: #FFFFFF;  /* Fondo blanco para las celdas */
+    color: #0B1A35;  /* Texto en color oscuro */
+    padding: 12px;
+    text-align: left;
+    font-size: 1em;
+    border-bottom: 1px solid #DDD;  /* Línea sutil entre filas */
+}
+
+/* Fila al pasar el mouse (hover) */
+tr:hover {
+    background-color: #FF6A80;  /* Rojo claro para resaltar fila al pasar el mouse */
+}
+
+/* Bordes de las celdas */
+td, th {
+    border: 1px solid #DDD;  /* Borde sutil entre celdas */
+}
+
+/* Espaciado y margen de las tablas */
+table, h2 {
+    margin-bottom: 30px;
+}
+
+/* Estilo para el contenedor de las tablas */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilo para la tabla de productos */
+.table-productos {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background-color: #2E8BC0;  /* Azul para las tablas */
+    border-radius: 8px;
+}
+
+/* Encabezados de la tabla de productos */
+.table-productos th {
+    background-color: #FF4C61;  /* Rojo vibrante */
+    color: #FFFFFF;  /* Texto blanco en los encabezados */
+    padding: 12px;
+    text-align: left;
+    font-size: 1.2em;
+}
+
+/* Filas de la tabla de productos */
+.table-productos td {
+    background-color: #FFFFFF;  /* Fondo blanco para las celdas */
+    color: #0B1A35;  /* Texto en color oscuro */
+    padding: 12px;
+    text-align: left;
+    font-size: 1em;
+    border-bottom: 1px solid #DDD;  /* Línea sutil entre filas */
+}
+
+/* Fila al pasar el mouse (hover) para la tabla de productos */
+.table-productos tr:hover {
+    background-color: #FF6A80;  /* Rojo claro para resaltar fila al pasar el mouse */
+}
+
+/* Bordes de las celdas en la tabla de productos */
+.table-productos td, .table-productos th {
+    border: 1px solid #DDD;  /* Borde sutil entre celdas */
+}
+
+/* Estilo para los botones de acción (Actualizar, Eliminar) */
+.table-productos input[type="submit"] {
+    background-color: #FF4C61;  /* Rojo vibrante */
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambiar color de fondo de los botones al pasar el mouse */
+.table-productos input[type="submit"]:hover {
+    background-color: #FF6A80;  /* Rojo claro */
+}
+
+/* Estilos para el formulario de agregar producto */
+.form-agregar-producto {
+    background-color: #2E8BC0;  /* Azul para el fondo del formulario */
+    padding: 20px;
+    border-radius: 8px;
+    width: 60%;
+    margin: 30px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos del formulario */
+.form-agregar-producto h3 {
+    text-align: center;
+    color: #FF4C61;  /* Rojo vibrante */
+    margin-bottom: 20px;
+}
+
+/* Etiquetas dentro del formulario */
+.form-agregar-producto label {
+    color: #FFFFFF;  /* Texto blanco */
+    font-size: 1.1em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Campos de entrada de texto */
+.form-agregar-producto input[type="text"], 
+.form-agregar-producto input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    color: #0B1A35;  /* Texto en color oscuro */
+    font-size: 1em;
+}
+
+/* Botón de agregar producto */
+.form-agregar-producto button[type="submit"] {
+    background-color: #FF4C61;  /* Rojo vibrante */
+    color: #FFFFFF;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+/* Cambiar el color del botón al pasar el mouse */
+.form-agregar-producto button[type="submit"]:hover {
+    background-color: #FF6A80;  /* Rojo claro */
+}
+
+/* Espaciado entre los elementos del formulario */
+.form-agregar-producto label, 
+.form-agregar-producto input, 
+.form-agregar-producto button {
+    margin-top: 10px;
+}
+
+.table-productos td.acciones {
+    text-align: right; /* Alinea el contenido de la celda a la derecha */
+}
+
+.table-productos td.acciones form {
+    display: inline-block; /* Mantiene los formularios en línea */
+}
+
+.table-productos td.acciones input[type="submit"] {
+    margin-left: 10px; /* Agrega espacio entre los botones */
+}
+
+/* Estilo para los botones */
+.btn-eliminar, .btn-actualizar {
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-eliminar {
+    background-color: #FF4C61; /* Rojo */
+    color: white;
+}
+
+.btn-actualizar {
+    background-color: #2E8BC0; /* Azul */
+    color: white;
+}
+
+.btn-eliminar:hover, .btn-actualizar:hover {
+    opacity: 0.8;
+}

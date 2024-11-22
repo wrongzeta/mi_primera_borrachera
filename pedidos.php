@@ -13,11 +13,12 @@ if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
-// Consulta para obtener los pedidos, incluyendo el nombre de la sede desde la tabla sedes
+// Consulta para obtener los pedidos, excluyendo los pedidos con estado 'cerrado'
 $query = "SELECT p.id, p.mesa_id, p.fecha, p.estado, s.nombre AS sede 
           FROM pedidos p
           JOIN mesas m ON p.mesa_id = m.id
-          JOIN sedes s ON m.sede_id = s.id"; // Unimos con la tabla sedes usando sede_id de mesas
+          JOIN sedes s ON m.sede_id = s.id
+          WHERE p.estado != 'cerrado'"; // Se añade la condición para excluir pedidos cerrados
 
 $result = $conn->query($query);
 
@@ -33,6 +34,12 @@ if ($result->num_rows > 0) {
 
 $conn->close();
 ?>
+
+<?php if (isset($_GET['mensaje'])): ?>
+    <div class="alert">
+        <?php echo htmlspecialchars($_GET['mensaje']); ?>
+    </div>
+<?php endif; ?>
 
 <!DOCTYPE html>
 <html lang="es">

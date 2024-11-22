@@ -24,6 +24,27 @@ if (isset($_GET['logout'])) {
     <title>Administrador - Mi Primera Borrachera</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles_admin.css">
+    <style>
+        /* Estilos para la alerta */
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            background-color: #4CAF50; /* Verde para éxito */
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .alert.error {
+            background-color: #f44336; /* Rojo para error */
+        }
+
+        .alert.info {
+            background-color: #2196F3; /* Azul para información */
+        }
+    </style>
 </head>
 <body>
     <div class="admin-container">
@@ -48,6 +69,7 @@ if (isset($_GET['logout'])) {
         <!-- Sección dinámica -->
         <main class="main-content">
             <div id="content">
+
                 <h1>Bienvenido, Administrador</h1>
                 <p>Selecciona una opción del menú para comenzar.</p>
             </div>

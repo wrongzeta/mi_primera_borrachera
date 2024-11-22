@@ -1,60 +1,43 @@
 <?php
-session_start();
+session_start();  // Asegúrate de que la sesión esté iniciada
 
-// Verifica si el usuario ha iniciado sesión y tiene el rol de administrador
-if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 3) {
-    header('Location: login.php');
-    exit;
-}
+// Verifica si el ID del pedido fue enviado
+if (isset($_GET['id'])) {
+    $pedido_id = $_GET['id'];
 
-if (isset($_POST['cambiar_estado']) && $_POST['cambiar_estado'] == 'cerrado' && isset($_POST['pedido_id'])) {
-    // Conexión a la base de datos
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "mi_primera_borrachera";
 
+    // Conectar a la base de datos
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
         die("Conexión fallida: " . $conn->connect_error);
     }
 
-    $pedido_id = $_POST['pedido_id'];
+    // Consulta para cambiar el estado del pedido a 'cerrado'
+    $query = "UPDATE pedidos SET estado = 'cerrado' WHERE id = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("i", $pedido_id);
 
-    // Verificar si el pedido ya está cerrado
-    $sql_check = "SELECT estado FROM pedidos WHERE id = ?";
-    if ($stmt = $conn->prepare($sql_check)) {
-        $stmt->bind_param('i', $pedido_id);
-        $stmt->execute();
-        $stmt->store_result();
-        $stmt->bind_result($estado);
-        $stmt->fetch();
-        if ($estado == 'cerrado') {
-            echo "El pedido ya está cerrado.";
-            $conn->close();
-            exit;
-        }
-    }
-
-    // Actualizar el estado del pedido a "cerrado"
-    $sql = "UPDATE pedidos SET estado = 'cerrado' WHERE id = ?";
-    if ($stmt = $conn->prepare($sql)) {
-        $stmt->bind_param('i', $pedido_id);
-        if ($stmt->execute()) {
-            echo "Pedido cerrado correctamente.";
-        } else {
-            echo "Error al cerrar el pedido.";
-        }
-        $stmt->close();
+    if ($stmt->execute()) {
+        // Si el cambio fue exitoso, redirigimos a la página admin.php con un mensaje de éxito
+        header("Location: admin.php?mensaje=Pedido cerrado correctamente.");
+        exit(); // Asegúrate de terminar el script después de la redirección
     } else {
-        echo "Error al preparar la consulta.";
+        // Si hubo un error en la ejecución, redirigimos con un mensaje de error
+        header("Location: admin.php?mensaje=Hubo un error al cerrar el pedido.");
+        exit();
     }
 
+    // Cerrar la conexión
+    $stmt->close();
     $conn->close();
-
-    // Redirigir de vuelta a la página de gestión de pedidos
-    header('Location: pedidos.php');
-    exit;
+} else {
+    // Si no se pasó un ID de pedido, redirigimos a admin.php
+    header("Location: admin.php?mensaje=No se especificó el pedido.");
+    exit();
 }
 ?>

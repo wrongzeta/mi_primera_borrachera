@@ -42,8 +42,8 @@ CREATE TABLE productos (
     nombre VARCHAR(100) NOT NULL,
     precio DECIMAL(10, 2) NOT NULL,
     imagen VARCHAR(255),
-    costo_venta DECIMAL(10, 2) NOT NULL, -- Agregar este campo
-    precio_venta DECIMAL(10, 2) NOT NULL -- Agregar este campo
+    costo_venta DECIMAL(10, 2) NOT NULL, 
+    precio_venta DECIMAL(10, 2) NOT NULL 
 );
 
 -- Tabla de inventarios
