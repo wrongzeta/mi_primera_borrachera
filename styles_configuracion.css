@@ -1,0 +1,196 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0B1A35; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal */
+.form-container {
+    width: 60%;
+    background-color: #1c2a47; /* Fondo ligeramente más claro */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Títulos */
+h2 {
+    color: #FF4C61; /* Color vibrante */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Separación más grande entre los elementos */
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #FFFFFF; /* Texto blanco */
+}
+
+/* Inputs y selects */
+input[type="text"],
+input[type="password"],
+select {
+    padding: 12px 15px;
+    background-color: #2E8BC0; /* Azul */
+    border: 1px solid #2E8BC0;
+    border-radius: 4px;
+    color: white;
+    width: 100%; /* Asegura que los inputs ocupen todo el espacio disponible */
+    box-sizing: border-box; /* Padding incluido en el ancho total */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+select:focus {
+    background-color: #FF6A80; /* Resaltado en hover */
+    outline: none;
+    border-color: #FF6A80;
+}
+
+/* Botón de enviar */
+button[type="submit"] {
+    padding: 12px 20px;
+    background-color: #FF4C61; /* Rojo vibrante */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #FF6A80; /* Resaltado en hover */
+}
+
+/* Tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    text-align: center;
+}
+
+thead {
+    background-color: #FF4C61; /* Color vibrante para encabezados */
+    color: white;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #2E8BC0; /* Azul */
+}
+
+tbody tr:nth-child(odd) {
+    background-color: #2E8BC0; /* Azul */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #1c2a47; /* Fondo oscuro más claro */
+}
+
+input[type="text"] {
+    padding: 5px;
+    width: 90%;
+    text-align: center;
+}
+
+/* Botón de acciones */
+button[type="submit"] {
+    background-color: #FF4C61; /* Rojo vibrante */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+
+button[type="submit"]:hover {
+    background-color: #FF6A80;
+}
+
+/* Contenedor de la tabla */
+.table-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #2E8BC0; /* Fondo azul */
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table-container th, .table-container td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.table-container th {
+    background-color: #FF4C61; /* Cabecera roja */
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.table-container td input, .table-container td select {
+    width: 100%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background-color: #FFFFFF;
+    color: #0B1A35;
+}
+
+.table-container td button {
+    padding: 5px 10px;
+    background-color: #FF4C61;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.table-container td button:hover {
+    background-color: #FF6A80; /* Hover en el botón */
+}
+
+/* Estilo responsivo */
+@media (max-width: 768px) {
+    .form-container, .table-container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .table-container table {
+        font-size: 0.9rem;
+    }
+
+    .table-container th, .table-container td {
+        padding: 8px;
+    }
+}
