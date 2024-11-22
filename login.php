@@ -67,6 +67,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Mi Primera Borrachera</title>
     <link rel="stylesheet" href="styles_login.css">
+    <script src="login.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -78,15 +79,17 @@ $conn->close();
         <!-- Formulario a la derecha -->
         <div class="login-container">
             <h2>Iniciar sesión</h2>
-            <form action="login.php" method="POST">
+            <form id="login-form" action="login.php" method="POST">
                 <label for="nombre">Nombre de usuario:</label>
                 <input type="text" id="nombre" name="nombre" required>
 
                 <label for="contraseña">Contraseña:</label>
                 <input type="password" id="contraseña" name="contraseña" required>
+                <span id="strength-indicator"></span>
 
-                <input type="submit" value="Iniciar sesión">
+                <input type="submit" id="submit-btn" value="Iniciar sesión" disabled>
             </form>
+
             <?php
                 // Mostrar error si la contraseña es incorrecta
                 if (isset($_GET['error']) && $_GET['error'] == 1) {

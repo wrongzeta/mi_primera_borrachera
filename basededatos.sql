@@ -78,6 +78,15 @@ CREATE TABLE detalles_pedido (
     FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 
+CREATE TABLE login_logs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    ip_address VARCHAR(255) NOT NULL,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    success BOOLEAN NOT NULL
+);
+
+
 -- Insertar roles
 INSERT INTO roles (nombre) VALUES ('mesero'), ('cajero'), ('admin');
 
