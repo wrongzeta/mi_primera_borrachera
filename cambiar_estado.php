@@ -32,9 +32,9 @@ if (isset($_GET['id'])) {
         exit();
     }
 
-    // Cerrar la conexión
-    $stmt->close();
-    $conn->close();
+    // Cerrar la conexión (este código ya no es necesario después de la redirección)
+    // $stmt->close();
+    // $conn->close();
 } else {
     // Si no se pasó un ID de pedido, redirigimos a admin.php
     header("Location: admin.php?mensaje=No se especificó el pedido.");
