@@ -15,7 +15,6 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 2) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaz del Cajero</title>
     <link rel="stylesheet" href="styles_cajero.css">
-    <!-- Enlace a FontAwesome para íconos -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
