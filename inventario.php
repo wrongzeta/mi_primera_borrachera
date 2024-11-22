@@ -87,7 +87,7 @@ if ($result->num_rows > 0) {
         echo "<td>$" . number_format($row['costo_venta'], 2) . "</td>";
         echo "<td>$" . number_format($row['precio_venta'], 2) . "</td>";
         echo "<td class='acciones'>
-                <form method='POST' action='procesar_inventario.php' style='display:inline'>
+                <form method='POST' action='actualizar_producto.php' style='display:inline'>
                     <input type='hidden' name='id' value='" . $row['id'] . "'>
                     <input type='text' name='nombre' value='" . $row['nombre'] . "' required>
                     <input type='number' name='precio' value='" . $row['precio'] . "' step='0.01' required>
