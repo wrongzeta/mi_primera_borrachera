@@ -26,11 +26,11 @@ if (!isset($_GET['id']) || empty($_GET['id'])) {
 }
 $pedido_id = intval($_GET['id']);
 
-// Consulta para obtener información del pedido
+// Consulta para obtener información del pedido (con LEFT JOIN para manejar usuario_id NULL)
 $sql_pedido = "SELECT p.id, p.fecha, p.estado, m.nombre AS mesa, u.username AS usuario
                FROM pedidos p
-               JOIN mesas m ON p.mesa_id = m.id
-               JOIN usuarios u ON p.usuario_id = u.id
+               LEFT JOIN mesas m ON p.mesa_id = m.id
+               LEFT JOIN usuarios u ON p.usuario_id = u.id
                WHERE p.id = ?";
 $stmt = $conn->prepare($sql_pedido);
 $stmt->bind_param("i", $pedido_id);
@@ -68,7 +68,7 @@ $result_detalles = $stmt_detalles->get_result();
     <p>
         <strong>Fecha:</strong> <?php echo $pedido['fecha']; ?><br>
         <strong>Mesa:</strong> <?php echo $pedido['mesa']; ?><br>
-        <strong>Usuario:</strong> <?php echo $pedido['usuario']; ?><br>
+        <strong>Usuario:</strong> <?php echo isset($pedido['usuario']) ? htmlspecialchars($pedido['usuario']) : "No asignado"; ?><br>
         <strong>Estado:</strong> <?php echo ucfirst($pedido['estado']); ?>
     </p>
 
